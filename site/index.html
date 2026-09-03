@@ -903,31 +903,62 @@
     position: relative;
     overflow: hidden;
     display: flex; align-items: center; justify-content: center;
+    background: var(--surface-3);
   }
-  .card-art .pattern {
+  /* 民族服饰图（占位/真实图） */
+  .card-art .ethnic-photo {
     position: absolute; inset: 0;
-    opacity: 0.85;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+  /* 图片下方的渐变蒙版,保证大字民族名清晰 */
+  .card-art::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(0,0,0,0.55) 100%);
+    z-index: 1;
+    pointer-events: none;
   }
   .card-art .glyph {
-    position: relative;
-    z-index: 2;
-    color: rgba(255,255,255,0.94);
+    position: absolute;
+    left: 14px; bottom: 16px;
+    z-index: 3;
+    color: rgba(255,255,255,0.96);
     font-family: var(--font-display);
-    font-size: 80px;
+    font-size: 32px;
     font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.04em;
-    text-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    letter-spacing: -0.02em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
   }
   .card-art .glyph-en {
     position: absolute;
-    bottom: 12px; right: 14px;
+    top: 12px; right: 14px;
     z-index: 3;
     font-family: var(--font-sans);
-    font-size: 11px;
-    color: rgba(255,255,255,0.7);
+    font-size: 10px;
+    color: rgba(255,255,255,0.85);
     letter-spacing: 0.16em;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(8px);
+    padding: 3px 8px;
+    border-radius: 100px;
     text-transform: uppercase;
+  }
+  /* 图缺失/加载失败时的占位(显示大字) */
+  .card-art .glyph-fallback {
+    position: absolute;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    color: rgba(255,255,255,0.95);
+    font-family: var(--font-display);
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-shadow: 0 4px 16px rgba(0,0,0,0.4);
   }
   .card-body {
     padding: 16px 18px 18px;
@@ -995,6 +1026,71 @@
     border-radius: 100px;
     background: var(--surface-3);
     color: var(--ink-soft);
+  }
+
+  /* 节日 chip(必显示) */
+  .card-festival {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: var(--ink);
+    margin-top: 8px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: var(--brand-muted);
+    border: 1px solid var(--brand-ring);
+  }
+  .card-festival::before { content: '🎉'; font-size: 12px; }
+
+  /* 小知识块(虚线框) */
+  .card-kidfact {
+    margin-top: 10px;
+    padding: 10px 12px;
+    background: var(--brand-muted);
+    border: 1px dashed var(--brand-ring);
+    border-radius: 10px;
+    font-family: var(--font-serif);
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink);
+    display: flex; align-items: flex-start; gap: 8px;
+  }
+  .card-kidfact .kf-icon { font-size: 14px; flex-shrink: 0; line-height: 1.6; }
+  .card-kidfact .kf-text { flex: 1; min-width: 0; }
+
+  /* 卡片底部喇叭按钮组 */
+  .card-speak {
+    display: flex; gap: 6px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .card-speak button {
+    flex: 1;
+    display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+    padding: 7px 4px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.16s;
+    min-width: 0;
+  }
+  .card-speak button:hover { border-color: var(--brand-ring); color: var(--brand); background: var(--brand-muted); }
+  .card-speak button:active { transform: scale(0.96); }
+  .card-speak button.speaking { background: var(--brand); color: var(--brand-foreground); border-color: var(--brand); }
+  .card-speak button .icn { font-size: 13px; line-height: 1; }
+  .card-speak button .lbl { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  /* 隐藏浏览器自带的按钮内边距, 让 .card-speak 不再触发卡片 click */
+  .card-speak button { -webkit-tap-highlight-color: transparent; }
+  /* 窄列下隐藏文字,只显示图标 */
+  @media (max-width: 1100px) {
+    .card-speak button .lbl { display: none; }
+    .card-speak button { padding: 7px 0; }
   }
 
   /* 入场动画 */
@@ -1529,12 +1625,14 @@
   .card-motif { font-size: 9.5px; padding: 3px 8px; }
   .card-cue { display: none; }
   .card-tags { display: none; }
-  .card-art .glyph { font-size: 52px; }
-  .card-art .glyph-2 { font-size: 42px; }
-  .card-art .glyph-3 { font-size: 36px; }
-  .card-art .glyph-4 { font-size: 30px; }
-  .card-art .glyph-5 { font-size: 25px; }
-  .card-art .glyph-en { font-size: 9.5px; }
+  .card-festival { font-size: 10px; padding: 3px 8px; margin-top: 6px; }
+  .card-kidfact { font-size: 11.5px; padding: 8px 10px; margin-top: 8px; line-height: 1.5; }
+  .card-kidfact .kf-icon { font-size: 12px; }
+  .card-speak { margin-top: 8px; padding-top: 8px; gap: 4px; }
+  .card-speak button { padding: 6px 2px; font-size: 10px; }
+  .card-speak button .icn { font-size: 11px; }
+  .card-art .glyph { font-size: 22px; left: 12px; bottom: 12px; }
+  .card-art .glyph-en { font-size: 9.5px; top: 8px; right: 8px; padding: 2px 6px; }
   .known-badge { width: 24px; height: 24px; font-size: 13px; top: 8px; right: 8px; }
 
   .modal { padding: 12px; }
@@ -2121,18 +2219,24 @@
     }
 
     function cardHTML(d, idx) {
-      const pattern = makePatternSVG(d.color, idx);
-      // 大字显示完整民族名（避免首字撞名），按字数适配字号
-      const glyphClass = 'glyph glyph-' + Math.min(Math.max(d.name.length, 2), 5);
+      // 真实图: images/<民族名>.jpg 优先,缺图时回退到 images/汉族.jpg 占位
+      // 当前只有占位图,所有卡都直接用汉族.jpg (无 404)
+      // 后续你把对应民族图命名为 images/<民族名>.jpg 后,
+      // 取消下面 safeName 行的注释即可自动切到对应图
+      // const safeName = encodeURIComponent(d.name);
+      // const photoPath = `images/${safeName}.jpg`;
+      const photoPath = `images/${encodeURIComponent('汉族')}.jpg`;
       return `
         <article class="card${isKnown(d.id) ? ' known' : ''}" data-id="${d.id}" data-region="${d.group || 'south'}"
                  data-search="${(d.name + ' ' + d.pinyin + ' ' + d.festival + ' ' + d.intro + ' ' + (d.tags || []).join(' ') + ' ' + d.costume).toLowerCase()}"
                  role="listitem" tabindex="0"
                  aria-label="${d.name} — ${d.pinyin}">
-          <div class="card-art" style="background-image: url('${pattern}');">
+          <div class="card-art">
+            <img class="ethnic-photo" src="${photoPath}" alt="${d.name}服饰图(占位,后续替换)"
+                 loading="lazy" decoding="async">
             <span class="known-badge" aria-hidden="true">✓</span>
-            <span class="${glyphClass}">${d.name}</span>
             <span class="glyph-en">${d.pinyin.split(' ')[0]}</span>
+            <span class="glyph">${d.name}</span>
           </div>
           <div class="card-body">
             <h3 class="card-name">${d.name}</h3>
@@ -2143,7 +2247,25 @@
               <span class="loc" style="display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">${d.region.replace(/^主要聚居|^主要分布于|^聚居|^世居|^原居/, '').split(/[，、]/)[0]}</span>
             </div>
             <span class="card-motif">${d.motif}</span>
+            ${d.festival ? `<span class="card-festival">代表节日 · ${d.festival}</span>` : ''}
+            ${d.kidFact ? `
+              <div class="card-kidfact">
+                <span class="kf-icon">🎈</span>
+                <span class="kf-text">${d.kidFact}</span>
+              </div>
+            ` : ''}
             <p class="card-cue">${d.costume}</p>
+            <div class="card-speak" role="group" aria-label="语音朗读">
+              <button type="button" data-speak="name" data-id="${d.id}" aria-label="读 ${d.name}">
+                <span class="icn">🔊</span><span class="lbl">名字</span>
+              </button>
+              <button type="button" data-speak="intro" data-id="${d.id}" aria-label="读 ${d.name} 的介绍">
+                <span class="icn">🔊</span><span class="lbl">介绍</span>
+              </button>
+              <button type="button" data-speak="kid" data-id="${d.id}" aria-label="读 ${d.name} 的小知识">
+                <span class="icn">🔊</span><span class="lbl">小知识</span>
+              </button>
+            </div>
             <div class="card-tags">${(d.tags || []).slice(0, 3).map(t => `<span class="card-tag">${t}</span>`).join('')}</div>
           </div>
         </article>
@@ -2245,6 +2367,23 @@
     }
 
     grid.addEventListener('click', (e) => {
+      // 喇叭按钮:朗读,不开弹窗
+      const speakBtn = e.target.closest('.card-speak button');
+      if (speakBtn) {
+        e.stopPropagation();
+        const d = DATA.find(x => x.id === speakBtn.dataset.id);
+        if (!d) return;
+        // 高亮当前按钮
+        const group = speakBtn.parentElement;
+        group.querySelectorAll('button').forEach(b => b.classList.remove('speaking'));
+        speakBtn.classList.add('speaking');
+        if (speakBtn.dataset.speak === 'name') speak(d.name);
+        else if (speakBtn.dataset.speak === 'kid') speak(d.kidFact);
+        else speak(`${d.name}。${d.kidFact} ${d.intro}`);
+        setTimeout(() => speakBtn.classList.remove('speaking'), 3000);
+        return;
+      }
+      // 其它区域:打开弹窗
       const card = e.target.closest('.card');
       if (card) openModal(card.dataset.id);
     });
