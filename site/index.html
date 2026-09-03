@@ -5,8 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>56 个民族图鉴 — foxai</title>
 <meta name="description" content="五十六个民族 · 一部行走的中华衣冠志。一份融合图文、服饰与文化脉络的 56 民族图鉴，致敬中华大地的多元与共美。" />
-<meta name="theme-color" content="#E2571F" />
+<meta name="theme-color" content="#FF7A4D" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#E2571F" media="(prefers-color-scheme: light)" />
+<script>
+  // 同步 mobile browser 的顶部栏颜色
+  (function () {
+    try {
+      var t = localStorage.getItem('foxai-56-theme') || 'dark';
+      var meta = document.createElement('meta');
+      meta.name = 'theme-color';
+      meta.content = t === 'light' ? '#E2571F' : '#FF7A4D';
+      document.head.appendChild(meta);
+    } catch (e) {}
+  })();
+</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23E2571F'/%3E%3Cg fill='none' stroke='white' stroke-width='7.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M23 55V22c0-7.2 5.8-13 13-13h2'/%3E%3Cpath d='M12.5 31h21'/%3E%3C/g%3E%3Ccircle cx='49' cy='9' r='5.5' fill='white'/%3E%3C/svg%3E" />
+<script>
+  // 防止暗/亮主题闪烁：在 CSS 解析前应用用户选择
+  (function () {
+    try {
+      var t = localStorage.getItem('foxai-56-theme');
+      if (t === 'light' || t === 'dark') {
+        document.documentElement.setAttribute('data-theme', t);
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
+  })();
+</script>
 <style>
   /* ===========================================================
      五十六个民族图鉴 — foxai
@@ -14,33 +40,39 @@
      主色：Ember #E2571F  ·  副色：宣纸米 #F4EEDC
      =========================================================== */
 
-  :root {
-    --brand: #E2571F;
-    --brand-2: #FF7A4D;
-    --brand-foreground: #FFFFFF;
-    --brand-muted: rgba(226, 87, 31, 0.10);
-    --brand-ring: rgba(226, 87, 31, 0.35);
-    --brand-glow: rgba(226, 87, 31, 0.45);
+  /* ===========================================================
+     主题：默认暗色 (Ember + 夜墨)
+     切到 [data-theme="light"] 启用宣纸米亮色。
+     localStorage 中存 'theme' = 'light' / 'dark'。
+     =========================================================== */
+  :root,
+  [data-theme="dark"] {
+    --brand: #FF7A4D;
+    --brand-2: #FF8A5C;
+    --brand-foreground: #1A1714;
+    --brand-muted: rgba(255, 122, 77, 0.16);
+    --brand-ring: rgba(255, 122, 77, 0.45);
+    --brand-glow: rgba(255, 122, 77, 0.55);
 
-    --ink: #1A1714;            /* 主墨色 */
-    --ink-soft: #6B6157;       /* 副墨色 */
-    --ink-faint: #A09588;
-    --line: #E2DCD0;
-    --line-soft: #EDE7DA;
+    --ink: #F2EAD7;            /* 主墨色：夜宣 */
+    --ink-soft: #A09588;       /* 副墨色 */
+    --ink-faint: #6B6157;
+    --line: #2C2620;
+    --line-soft: #221D17;
 
-    --surface: #F8F3E7;         /* 主宣纸 */
-    --surface-2: #F2EAD7;      /* 副宣纸 */
-    --surface-3: #EBE0C8;      /* 深宣纸 */
-    --code-bg: #1F1B17;
+    --surface: #14110E;         /* 主背景：深墨 */
+    --surface-2: #1F1B17;      /* 副背景 */
+    --surface-3: #2A241D;      /* 深一层 */
+    --code-bg: #0F0D0A;
     --code-fg: #F5EFE0;
 
-    --ok: #2E7D32;              /* 答对 */
-    --ok-bg: #E8F5E9;
-    --bad: #C62828;             /* 答错 */
-    --bad-bg: #FFEBEE;
+    --ok: #8FD996;
+    --ok-bg: rgba(46, 125, 50, 0.22);
+    --bad: #F09090;
+    --bad-bg: rgba(198, 40, 40, 0.24);
 
-    --shadow-card: 0 1px 0 rgba(255,255,255,0.6) inset, 0 12px 24px -16px rgba(60,40,20,0.18);
-    --shadow-card-hover: 0 1px 0 rgba(255,255,255,0.8) inset, 0 24px 48px -24px rgba(60,40,20,0.28);
+    --shadow-card: 0 1px 0 rgba(255,255,255,0.04) inset, 0 12px 24px -16px rgba(0,0,0,0.55);
+    --shadow-card-hover: 0 1px 0 rgba(255,255,255,0.08) inset, 0 24px 48px -24px rgba(0,0,0,0.7);
 
     --radius-card: 18px;
     --radius-control: 10px;
@@ -51,29 +83,33 @@
     --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
   }
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --brand: #FF7A4D;
-      --brand-foreground: #1A1714;
-      --brand-muted: rgba(255, 122, 77, 0.16);
-      --brand-ring: rgba(255, 122, 77, 0.45);
+  [data-theme="light"] {
+    --brand: #E2571F;
+    --brand-2: #FF7A4D;
+    --brand-foreground: #FFFFFF;
+    --brand-muted: rgba(226, 87, 31, 0.10);
+    --brand-ring: rgba(226, 87, 31, 0.35);
+    --brand-glow: rgba(226, 87, 31, 0.45);
 
-      --ink: #F2EAD7;
-      --ink-soft: #A09588;
-      --ink-faint: #6B6157;
-      --line: #2C2620;
-      --line-soft: #221D17;
+    --ink: #1A1714;
+    --ink-soft: #6B6157;
+    --ink-faint: #A09588;
+    --line: #E2DCD0;
+    --line-soft: #EDE7DA;
 
-      --surface: #1A1714;
-      --surface-2: #221D17;
-      --surface-3: #2A241D;
-      --code-bg: #0F0D0A;
+    --surface: #F8F3E7;
+    --surface-2: #F2EAD7;
+    --surface-3: #EBE0C8;
+    --code-bg: #1F1B17;
+    --code-fg: #F5EFE0;
 
-      --ok: #8FD996;
-      --ok-bg: rgba(46, 125, 50, 0.22);
-      --bad: #F09090;
-      --bad-bg: rgba(198, 40, 40, 0.24);
-    }
+    --ok: #2E7D32;
+    --ok-bg: #E8F5E9;
+    --bad: #C62828;
+    --bad-bg: #FFEBEE;
+
+    --shadow-card: 0 1px 0 rgba(255,255,255,0.6) inset, 0 12px 24px -16px rgba(60,40,20,0.18);
+    --shadow-card-hover: 0 1px 0 rgba(255,255,255,0.8) inset, 0 24px 48px -24px rgba(60,40,20,0.28);
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -83,6 +119,7 @@
     font-family: var(--font-serif);
     color: var(--ink);
     background: var(--surface);
+    transition: background-color 0.32s ease, color 0.32s ease;
     line-height: 1.6;
     font-size: 15px;
     min-height: 100vh;
@@ -144,6 +181,36 @@
     color: var(--ink-soft); font-size: 12.5px; font-family: var(--font-sans);
   }
   .topbar-meta span + span::before { content: '·'; margin-right: 18px; color: var(--ink-faint); }
+
+  /* 明暗切换按钮 */
+  .theme-toggle {
+    position: relative;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--ink);
+    display: inline-flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s, color 0.2s, transform 0.2s;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .theme-toggle:hover { border-color: var(--brand-ring); color: var(--brand); transform: rotate(12deg); }
+  .theme-toggle:active { transform: rotate(0deg) scale(0.92); }
+  .theme-icon {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: opacity 0.32s ease, transform 0.32s ease;
+  }
+  /* 默认(dark):显示 sun (切换到 light) */
+  [data-theme="dark"] .theme-icon-sun,
+  :root:not([data-theme]) .theme-icon-sun { opacity: 1; transform: rotate(0deg) scale(1); }
+  [data-theme="dark"] .theme-icon-moon,
+  :root:not([data-theme]) .theme-icon-moon { opacity: 0; transform: rotate(-90deg) scale(0.6); }
+  /* light:显示 moon (切换到 dark) */
+  [data-theme="light"] .theme-icon-sun { opacity: 0; transform: rotate(90deg) scale(0.6); }
+  [data-theme="light"] .theme-icon-moon { opacity: 1; transform: rotate(0deg) scale(1); }
 
   /* ===========================================================
      Hero — 标题区
@@ -1567,6 +1634,19 @@
       <span>中国民族图鉴</span>
       <span>2026 Edition</span>
     </div>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换明暗主题" title="切换明暗主题">
+      <span class="theme-icon theme-icon-sun" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </span>
+      <span class="theme-icon theme-icon-moon" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </span>
+    </button>
   </div>
 </header>
 
@@ -1869,6 +1949,23 @@
        =========================================================== */
 
     const MODE = { learn: 'learn', play: 'play' };
+
+    /* ---------- 明暗主题切换 ---------- */
+    const THEME_KEY = 'foxai-56-theme';
+    const themeBtn = document.getElementById('theme-toggle');
+    function currentTheme() { return document.documentElement.getAttribute('data-theme') || 'dark'; }
+    function applyTheme(t) {
+      document.documentElement.setAttribute('data-theme', t);
+      try { localStorage.setItem(THEME_KEY, t); } catch (e) {}
+      // 同步 mobile theme-color
+      let meta = document.querySelector('meta[name="theme-color"]:not([media])');
+      if (meta) meta.setAttribute('content', t === 'light' ? '#E2571F' : '#FF7A4D');
+    }
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        applyTheme(currentTheme() === 'dark' ? 'light' : 'dark');
+      });
+    }
     let currentMode = MODE.learn;
 
     const DATA = window.ETHNIC_DATA || [];
