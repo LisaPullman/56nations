@@ -34,6 +34,11 @@
     --code-bg: #1F1B17;
     --code-fg: #F5EFE0;
 
+    --ok: #2E7D32;              /* 答对 */
+    --ok-bg: #E8F5E9;
+    --bad: #C62828;             /* 答错 */
+    --bad-bg: #FFEBEE;
+
     --shadow-card: 0 1px 0 rgba(255,255,255,0.6) inset, 0 12px 24px -16px rgba(60,40,20,0.18);
     --shadow-card-hover: 0 1px 0 rgba(255,255,255,0.8) inset, 0 24px 48px -24px rgba(60,40,20,0.28);
 
@@ -63,6 +68,11 @@
       --surface-2: #221D17;
       --surface-3: #2A241D;
       --code-bg: #0F0D0A;
+
+      --ok: #8FD996;
+      --ok-bg: rgba(46, 125, 50, 0.22);
+      --bad: #F09090;
+      --bad-bg: rgba(198, 40, 40, 0.24);
     }
   }
 
@@ -495,15 +505,15 @@
     transform: translateY(-2px);
   }
   .quiz-option.correct {
-    border-color: #2E7D32;
-    background: #E8F5E9;
-    color: #2E7D32;
+    border-color: var(--ok);
+    background: var(--ok-bg);
+    color: var(--ok);
     animation: bounce 0.4s;
   }
   .quiz-option.wrong {
-    border-color: #C62828;
-    background: #FFEBEE;
-    color: #C62828;
+    border-color: var(--bad);
+    background: var(--bad-bg);
+    color: var(--bad);
     animation: shake 0.4s;
   }
   @keyframes bounce {
@@ -565,22 +575,22 @@
   }
   .match-card.flipped { background: var(--brand-muted); border-color: var(--brand-ring); }
   .match-card.matched {
-    background: #E8F5E9;
-    border-color: #2E7D32;
-    color: #2E7D32;
+    background: var(--ok-bg);
+    border-color: var(--ok);
+    color: var(--ok);
     cursor: default;
   }
   .match-card.matched::after {
     content: '✓';
     position: absolute;
     top: 8px; right: 12px;
-    color: #2E7D32;
+    color: var(--ok);
     font-size: 14px;
     font-weight: bold;
   }
   .match-card.wrong-pick {
-    background: #FFEBEE;
-    border-color: #C62828;
+    background: var(--bad-bg);
+    border-color: var(--bad);
     animation: shake 0.4s;
   }
   .match-card[data-type="ethnic"] .face { color: var(--brand); }
@@ -616,9 +626,9 @@
     border-color: var(--brand);
   }
   .connect-node.matched {
-    background: #E8F5E9;
-    border-color: #2E7D32;
-    color: #2E7D32;
+    background: var(--ok-bg);
+    border-color: var(--ok);
+    color: var(--ok);
     cursor: default;
     pointer-events: none;
   }
@@ -627,7 +637,7 @@
     font-size: 24px;
     color: var(--ink-faint);
   }
-  .connect-line.has-match { color: #2E7D32; }
+  .connect-line.has-match { color: var(--ok); }
 
   /* ---------- 游戏 4: 翻牌记忆 ---------- */
 
@@ -685,8 +695,8 @@
     font-weight: 600;
     line-height: 1.3;
   }
-  .mem-card.matched { border-color: #2E7D32; }
-  .mem-card.matched .face { background: #E8F5E9; color: #2E7D32; }
+  .mem-card.matched { border-color: var(--ok); }
+  .mem-card.matched .face { background: var(--ok-bg); color: var(--ok); }
   .mem-card.flipped:not(.matched) { border-color: var(--brand-ring); }
 
   /* ---------- 胜利 ---------- */
@@ -852,20 +862,6 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
   }
-  .card-art .seal-mark {
-    position: absolute;
-    top: 12px; left: 12px;
-    z-index: 3;
-    width: 26px; height: 26px;
-    background: rgba(0,0,0,0.25);
-    backdrop-filter: blur(8px);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    color: rgba(255,255,255,0.92);
-    font-family: var(--font-display);
-    font-size: 14px;
-    font-weight: 700;
-  }
   .card-body {
     padding: 16px 18px 18px;
     background: var(--surface-2);
@@ -894,7 +890,9 @@
     color: var(--ink-soft);
     margin-bottom: 12px;
   }
-  .card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+  .card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); flex-shrink: 0; }
+  .card-meta .pop { white-space: nowrap; flex-shrink: 0; }
+  .card-meta .loc { flex: 1; min-width: 0; }
   .card-motif {
     display: inline-block;
     font-family: var(--font-sans);
@@ -1011,6 +1009,10 @@
     letter-spacing: -0.05em;
     text-shadow: 0 12px 40px rgba(0,0,0,0.4);
   }
+  .modal-art .glyph-2 { font-size: 148px; }
+  .modal-art .glyph-3 { font-size: 118px; }
+  .modal-art .glyph-4 { font-size: 98px; }
+  .modal-art .glyph-5 { font-size: 82px; }
   .modal-art .seal-num {
     position: absolute;
     top: 18px; right: 18px;
@@ -1078,7 +1080,7 @@
 
   .modal-info-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 16px;
     padding: 18px 0;
     border-top: 1px solid var(--line);
@@ -1188,6 +1190,175 @@
   body.modal-open { overflow: hidden; }
 
   /* ===========================================================
+     学习进度 / 儿童学习功能
+     =========================================================== */
+
+  .learn-progress {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--font-sans);
+    font-size: 12px; color: var(--ink-soft);
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    background: var(--surface-2);
+    white-space: nowrap;
+  }
+  .learn-progress b { color: var(--brand); font-weight: 700; font-size: 14px; }
+  .lp-bar {
+    width: 72px; height: 6px;
+    border-radius: 100px;
+    background: var(--surface-3);
+    overflow: hidden;
+  }
+  .lp-fill {
+    height: 100%; width: 0;
+    border-radius: 100px;
+    background: linear-gradient(90deg, var(--brand), var(--brand-2));
+    transition: width 0.4s ease;
+  }
+
+  /* 卡片「已认识」印章 */
+  .known-badge {
+    position: absolute;
+    top: 12px; right: 12px;
+    z-index: 3;
+    width: 30px; height: 30px;
+    display: none;
+    align-items: center; justify-content: center;
+    background: var(--brand);
+    color: var(--brand-foreground);
+    border-radius: 50%;
+    font-size: 16px; font-weight: 700;
+    box-shadow: 0 4px 12px -4px rgba(0,0,0,0.45);
+  }
+  .card.known .known-badge { display: flex; }
+
+  /* 卡片大字按民族名字数自适应（完整名称，避免首字撞名） */
+  .card-art .glyph-2 { font-size: 62px; }
+  .card-art .glyph-3 { font-size: 50px; }
+  .card-art .glyph-4 { font-size: 42px; }
+  .card-art .glyph-5 { font-size: 34px; }
+
+  /* 弹窗操作行：朗读 + 认识打卡 */
+  .modal-actions {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin: 0 0 18px;
+  }
+  .ma-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+    padding: 10px 18px;
+    border-radius: 100px;
+    border: 1.5px solid var(--line);
+    background: var(--surface-2);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .ma-btn:hover { border-color: var(--brand-ring); color: var(--brand); }
+  .ma-btn.know {
+    background: var(--brand); border-color: var(--brand);
+    color: var(--brand-foreground);
+    min-width: 160px;
+  }
+  .ma-btn.know:hover { color: var(--brand-foreground); opacity: 0.9; }
+  .ma-btn.know.known {
+    background: var(--ok); border-color: var(--ok); color: #fff;
+  }
+  .ma-btn.know.known:hover { color: #fff; opacity: 0.9; }
+
+  /* 趣味知识块 */
+  .modal-section.kidfact p {
+    background: var(--brand-muted);
+    border: 1px dashed var(--brand-ring);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 15.5px;
+  }
+  .kidfact-speak {
+    border: 0; background: none; cursor: pointer;
+    font-size: 15px; padding: 0 2px;
+    color: var(--ink-soft);
+  }
+  .kidfact-speak:hover { color: var(--brand); }
+
+  /* 提示 toast */
+  .toast {
+    position: fixed;
+    left: 50%; bottom: 28px;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--ink);
+    color: var(--surface);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    padding: 12px 22px;
+    border-radius: 100px;
+    box-shadow: 0 12px 32px -12px rgba(0,0,0,0.4);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 200;
+    max-width: 86vw;
+    text-align: center;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  /* 集齐 56 个庆祝 */
+  .finish-overlay {
+    position: fixed; inset: 0;
+    background: rgba(15, 10, 8, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 300;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+  }
+  .finish-overlay[hidden] { display: none; }
+  .finish-card {
+    background: var(--surface);
+    border: 2px solid var(--brand);
+    border-radius: 24px;
+    padding: 40px 36px;
+    max-width: 420px;
+    text-align: center;
+    box-shadow: 0 32px 80px -24px rgba(0,0,0,0.5);
+  }
+  .finish-card .emoji { font-size: 44px; margin-bottom: 12px; }
+  .finish-card h3 {
+    font-family: var(--font-display);
+    font-size: 30px; margin: 0 0 10px; color: var(--brand);
+  }
+  .finish-card p { color: var(--ink-soft); margin: 0 0 20px; line-height: 1.7; }
+  .finish-card button {
+    padding: 12px 28px; border-radius: 100px; border: 0;
+    background: var(--brand); color: var(--brand-foreground);
+    font-family: var(--font-sans); font-size: 14px; font-weight: 600; cursor: pointer;
+  }
+
+  /* 测验「下一题」按钮 */
+  .quiz-next {
+    margin-top: 14px;
+    padding: 12px 28px;
+    border-radius: 100px;
+    border: 0;
+    background: var(--brand);
+    color: var(--brand-foreground);
+    font-family: var(--font-sans);
+    font-size: 14px; font-weight: 600;
+    cursor: pointer;
+  }
+  .quiz-next:hover { opacity: 0.92; }
+
+  /* 连连看列头 */
+  .connect-h {
+    font-family: var(--font-sans);
+    font-size: 11px; letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    text-align: center;
+    padding-bottom: 2px;
+  }
+
+  /* ===========================================================
      Footer
      =========================================================== */
 
@@ -1280,6 +1451,8 @@
   .filter-chip { padding: 6px 12px; font-size: 11.5px; }
   .search input { padding: 12px 14px 12px 38px; font-size: 13px; }
   .counter { font-size: 11px; width: 100%; text-align: left; }
+  .learn-progress { order: 5; width: 100%; justify-content: space-between; padding: 8px 12px; }
+  .lp-bar { flex: 1; width: auto; }
 
   .grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; padding: 18px 0 60px; }
   .card-body { padding: 12px 12px 14px; }
@@ -1290,16 +1463,28 @@
   .card-cue { display: none; }
   .card-tags { display: none; }
   .card-art .glyph { font-size: 52px; }
+  .card-art .glyph-2 { font-size: 42px; }
+  .card-art .glyph-3 { font-size: 36px; }
+  .card-art .glyph-4 { font-size: 30px; }
+  .card-art .glyph-5 { font-size: 25px; }
   .card-art .glyph-en { font-size: 9.5px; }
+  .known-badge { width: 24px; height: 24px; font-size: 13px; top: 8px; right: 8px; }
 
   .modal { padding: 12px; }
   .modal-dialog { grid-template-columns: 1fr; max-height: 96vh; border-radius: 18px; }
   .modal-art { min-height: 180px; }
   .modal-art .glyph { font-size: 140px; }
+  .modal-art .glyph-2 { font-size: 96px; }
+  .modal-art .glyph-3 { font-size: 80px; }
+  .modal-art .glyph-4 { font-size: 66px; }
+  .modal-art .glyph-5 { font-size: 56px; }
   .modal-art .corner-label { font-size: 9px; bottom: 14px; left: 14px; }
   .modal-art .seal-num { font-size: 10px; top: 14px; right: 14px; }
   .modal-body { padding: 22px 22px 26px; }
   .modal-title { font-size: 30px; }
+  .modal-actions { gap: 8px; }
+  .ma-btn { padding: 10px 14px; font-size: 12.5px; }
+  .ma-btn.know { min-width: 100%; order: -1; }
   .modal-info-grid { gap: 14px; padding: 14px 0; margin: 4px 0 18px; }
   .modal-section h4 { font-size: 10px; }
   .modal-section p { font-size: 13.5px; line-height: 1.7; }
@@ -1392,16 +1577,16 @@
         <div>
           <div class="hero-eyebrow">
             <span class="dot"></span>
-            中国民族图鉴 · 56 个民族 · 一部行走的衣冠志
+            56 个民族小伙伴 · 听一听 · 玩一玩 · 认一认
           </div>
           <h1 class="hero-title">
             五十<span class="red">六</span>族
             <span class="small">From Yellow River to Snow Plateau</span>
           </h1>
           <p class="hero-lede">
-            雪山之下有袍，竹楼之间有歌。一份图文交织的中华衣冠志，
-            致敬五十六个民族在山河间共同织出的多元画卷。
-            点开任意一张卡片，看见一段服饰、一种节庆、一句山歌。
+            雪山下有藏袍，竹楼里有歌声。点开卡片，听一听民族的名字，
+            猜一猜他们的节日和小秘密，和爸爸妈妈一起，
+            把 56 个民族小伙伴都认识一遍吧！
           </p>
           <div class="hero-stats">
             <div>
@@ -1413,8 +1598,8 @@
               <div class="stat-label">共同家园</div>
             </div>
             <div>
-              <div class="stat-num">∞</div>
-              <div class="stat-label">绣样与银光</div>
+              <div class="stat-num">4<span class="unit">个</span></div>
+              <div class="stat-label">趣味小游戏</div>
             </div>
           </div>
         </div>
@@ -1433,7 +1618,7 @@
          模式切换 + 控制条
          =========================================================== -->
     <div class="controls" role="search">
-      <div class="mode-switch" role="tablist" aria-label="模式切换">
+      <div class="mode-switch" role="group" aria-label="模式切换">
         <button class="active" data-mode="learn">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
@@ -1453,14 +1638,19 @@
         </svg>
         <input id="search-input" type="search" placeholder="搜索民族名 / 拼音 / 节庆 / 服饰关键词" aria-label="搜索民族" />
       </div>
-      <div class="filter-group" id="filter-wrap" role="tablist" aria-label="地域筛选">
-        <button class="filter-chip active" data-region="all">全部</button>
-        <button class="filter-chip" data-region="northwest">北方</button>
-        <button class="filter-chip" data-region="tibet">青藏</button>
-        <button class="filter-chip" data-region="south">南方</button>
+      <div class="filter-group" id="filter-wrap" role="group" aria-label="地域筛选">
+        <button class="filter-chip active" data-region="all" aria-pressed="true">全部</button>
+        <button class="filter-chip" data-region="north" aria-pressed="false">北方</button>
+        <button class="filter-chip" data-region="tibet" aria-pressed="false">青藏</button>
+        <button class="filter-chip" data-region="south" aria-pressed="false">南方</button>
       </div>
       <div class="counter" id="counter-wrap" aria-live="polite">
         显示 <b id="visible-count">56</b> / 56
+      </div>
+      <div class="learn-progress" id="learn-progress" title="在卡片详情里点「我认识它啦」打卡">
+        <span>🌟 我认识的</span>
+        <b id="known-count">0</b><span>/ 56</span>
+        <div class="lp-bar" aria-hidden="true"><div class="lp-fill" id="known-fill"></div></div>
       </div>
     </div>
 
@@ -1481,7 +1671,7 @@
           <div class="game-card" data-game="quiz">
             <span class="num">N° 01</span>
             <h3>民族找一找</h3>
-            <p>看到服饰线索，把对应的民族挑出来。</p>
+            <p>看节日、服饰和小知识线索，猜猜是哪个民族。</p>
             <span class="play-arrow">开始挑战 →</span>
           </div>
           <div class="game-card" data-game="match">
@@ -1499,7 +1689,7 @@
           <div class="game-card" data-game="memory">
             <span class="num">N° 04</span>
             <h3>记忆翻翻乐</h3>
-            <p>翻牌找到所有民族与服饰的搭配。</p>
+            <p>翻牌找到所有民族和它的节日的搭配。</p>
             <span class="play-arrow">开始挑战 →</span>
           </div>
         </div>
@@ -1511,7 +1701,7 @@
         <div class="game-header">
           <div>
             <h2>民族找一找</h2>
-            <p>看服饰特征，从候选里挑出答案。每答一题 +10 分，连续答对还会加分哦！</p>
+            <p>看看线索——节日、服饰、小知识或家乡，从候选里挑出答案。答对一题 +10 分！</p>
           </div>
           <div class="game-stats">
             <span class="stat-pill">得分 <b id="quiz-score">0</b></span>
@@ -1558,7 +1748,7 @@
         <div class="game-header">
           <div>
             <h2>记忆翻翻乐</h2>
-            <p>20 张卡里藏着 10 对「民族 + 服饰关键词」，记位置、找配对，全部找到就通关！</p>
+            <p>20 张卡里藏着 10 对「民族 + 节日」，记位置、找配对，全部找到就通关！</p>
           </div>
           <div class="game-stats">
             <span class="stat-pill">配对 <b id="memory-found">0</b>/10</span>
@@ -1601,15 +1791,30 @@
       <h2 class="modal-title" id="modal-title">—</h2>
       <div class="modal-pinyin" id="modal-pinyin">—</div>
 
+      <div class="modal-actions">
+        <button class="ma-btn speak" data-speak="name" type="button">🔊 读名字</button>
+        <button class="ma-btn speak" data-speak="intro" type="button">🔊 读介绍</button>
+        <button class="ma-btn know" id="know-btn" type="button">我认识它啦！</button>
+      </div>
+
       <div class="modal-info-grid">
         <div class="info-cell">
           <div class="label">人口</div>
           <div class="value" id="modal-population">—</div>
         </div>
         <div class="info-cell">
+          <div class="label">代表节日</div>
+          <div class="value" id="modal-festival">—</div>
+        </div>
+        <div class="info-cell">
           <div class="label">主色调</div>
           <div class="value" id="modal-motif">—</div>
         </div>
+      </div>
+
+      <div class="modal-section kidfact">
+        <h4>🎈 小朋友看这里 <button class="kidfact-speak" data-speak="kid" type="button" aria-label="朗读趣味知识">🔊</button></h4>
+        <p id="modal-kidfact">—</p>
       </div>
 
       <div class="modal-section costume">
@@ -1646,7 +1851,18 @@
   </div>
 </footer>
 
-<script src="./ethnic-groups.js"></script>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="finish-overlay" id="finish-overlay" hidden>
+  <div class="finish-card">
+    <div class="emoji">🎉🏆🎊</div>
+    <h3>全部认识啦！</h3>
+    <p>56 个民族小伙伴你都认识了，<br />真是太厉害了！<br />再去游戏里考考自己吧～</p>
+    <button type="button" id="finish-close">继续探索</button>
+  </div>
+</div>
+
+<script src="./ethnic-groups.js?v=2"></script>
 <script>
     /* ===========================================================
        应用脚本
@@ -1680,22 +1896,94 @@
     const modalCostume = document.getElementById('modal-costume');
     const modalIntro = document.getElementById('modal-intro');
     const modalTags = document.getElementById('modal-tags');
+    const modalFestival = document.getElementById('modal-festival');
+    const modalKidFact = document.getElementById('modal-kidfact');
+    const knowBtn = document.getElementById('know-btn');
+    const knownCount = document.getElementById('known-count');
+    const knownFill = document.getElementById('known-fill');
+    const toastEl = document.getElementById('toast');
+    const finishOverlay = document.getElementById('finish-overlay');
 
-    /* ---------- 按地域归类 ---------- */
-    function regionOf(name) {
-      const n = name || '';
-      if (/内蒙古|新疆|宁夏|广西|黑龙江|吉林|辽宁|河北|甘肃|河南|山东|山西|陕西/.test(n)) return 'north';
-      if (/云南|贵州|四川|重庆|湖南|湖北|广东|广西|福建|浙江|江西|安徽|海南|台湾/.test(n)) return 'south';
-      if (/内蒙古|新疆|甘肃|宁夏/.test(n)) return 'northwest';
-      if (/西藏|青海|四川|甘肃|云南/.test(n)) return 'tibet';
-      return 'south';
+    /* ---------- 学习进度：我认识的民族（localStorage） ---------- */
+    const KNOWN_KEY = 'foxai-56-known';
+    let knownSet = new Set();
+    try { knownSet = new Set(JSON.parse(localStorage.getItem(KNOWN_KEY) || '[]')); } catch (e) { /* 隐私模式等场景忽略 */ }
+
+    function isKnown(id) { return knownSet.has(id); }
+    function saveKnown() {
+      try { localStorage.setItem(KNOWN_KEY, JSON.stringify([...knownSet])); } catch (e) {}
     }
-    // 简化规则：以上分类有歧义，统一用更精确的二级分类
-    function regionOfClean(d) {
-      const r = (d.region || '').toLowerCase();
-      if (r.includes('西藏') || r.includes('涉藏') || r.includes('青海')) return 'tibet';
-      if (r.includes('内蒙古') || r.includes('新疆') || r.includes('宁夏') || r.includes('甘肃') || r.includes('黑龙江') || r.includes('吉林') || r.includes('辽宁') || r.includes('河北')) return 'northwest';
-      return 'south';
+    function updateKnownUI() {
+      const n = knownSet.size;
+      knownCount.textContent = n;
+      knownFill.style.width = (DATA.length ? (n / DATA.length) * 100 : 0) + '%';
+      grid.querySelectorAll('.card').forEach(c => c.classList.toggle('known', isKnown(c.dataset.id)));
+    }
+    let toastTimer = null;
+    function showToast(text) {
+      toastEl.textContent = text;
+      toastEl.classList.add('show');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove('show'), 2600);
+    }
+    function toggleKnown(id) {
+      const was = knownSet.has(id);
+      if (was) {
+        knownSet.delete(id);
+      } else {
+        knownSet.add(id);
+        const n = knownSet.size;
+        if (n === DATA.length) {
+          finishOverlay.hidden = false;
+        } else if (n % 14 === 0) {
+          showToast(`🌟 太棒了！已经认识 ${n} / 56 个民族啦！`);
+        }
+      }
+      saveKnown();
+      updateKnownUI();
+    }
+    knowBtn.addEventListener('click', () => {
+      if (currentIdx < 0) return;
+      const id = DATA[currentIdx].id;
+      toggleKnown(id);
+      syncKnowBtn(id);
+    });
+    document.getElementById('finish-close').addEventListener('click', () => { finishOverlay.hidden = true; });
+    finishOverlay.addEventListener('click', (e) => { if (e.target === finishOverlay) finishOverlay.hidden = true; });
+    function syncKnowBtn(id) {
+      const known = isKnown(id);
+      knowBtn.classList.toggle('known', known);
+      knowBtn.textContent = known ? '已认识 ✓（点一下取消）' : '我认识它啦！';
+    }
+
+    /* ---------- 语音朗读（Web Speech API，儿童慢速） ---------- */
+    const TTS_OK = 'speechSynthesis' in window && typeof SpeechSynthesisUtterance !== 'undefined';
+    let zhVoice = null;
+    function pickZhVoice() {
+      try {
+        const vs = speechSynthesis.getVoices();
+        if (!vs.length) return null;
+        zhVoice = vs.find(v => /zh[-_]cn/i.test(v.lang)) || vs.find(v => /^zh/i.test(v.lang)) || null;
+      } catch (e) {}
+      return zhVoice;
+    }
+    function speak(text) {
+      if (!TTS_OK || !text) return;
+      try {
+        speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'zh-CN';
+        u.rate = 0.9;   // 稍慢，方便小朋友跟上
+        u.pitch = 1.05;
+        const v = zhVoice || pickZhVoice();
+        if (v) u.voice = v;
+        speechSynthesis.speak(u);
+      } catch (e) {}
+    }
+    if (TTS_OK) {
+      try { speechSynthesis.onvoiceschanged = () => { zhVoice = null; }; } catch (e) {}
+    } else {
+      document.querySelectorAll('.ma-btn.speak, .kidfact-speak').forEach(b => { b.style.display = 'none'; });
     }
 
     /* ---------- 卡片渲染 ---------- */
@@ -1737,23 +2025,25 @@
 
     function cardHTML(d, idx) {
       const pattern = makePatternSVG(d.color, idx);
+      // 大字显示完整民族名（避免首字撞名），按字数适配字号
+      const glyphClass = 'glyph glyph-' + Math.min(Math.max(d.name.length, 2), 5);
       return `
-        <article class="card" data-id="${d.id}" data-region="${regionOfClean(d)}"
-                 data-search="${(d.name + ' ' + d.pinyin + ' ' + d.intro + ' ' + (d.tags || []).join(' ') + ' ' + d.costume).toLowerCase()}"
+        <article class="card${isKnown(d.id) ? ' known' : ''}" data-id="${d.id}" data-region="${d.group || 'south'}"
+                 data-search="${(d.name + ' ' + d.pinyin + ' ' + d.festival + ' ' + d.intro + ' ' + (d.tags || []).join(' ') + ' ' + d.costume).toLowerCase()}"
                  role="listitem" tabindex="0"
                  aria-label="${d.name} — ${d.pinyin}">
           <div class="card-art" style="background-image: url('${pattern}');">
-            <span class="seal-mark">${d.name[0]}</span>
-            <span class="glyph">${d.name[0]}</span>
+            <span class="known-badge" aria-hidden="true">✓</span>
+            <span class="${glyphClass}">${d.name}</span>
             <span class="glyph-en">${d.pinyin.split(' ')[0]}</span>
           </div>
           <div class="card-body">
             <h3 class="card-name">${d.name}</h3>
             <div class="card-pinyin">${d.pinyin}</div>
             <div class="card-meta">
-              <span>${d.population}</span>
+              <span class="pop">${d.population}</span>
               <span class="dot"></span>
-              <span style="display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">${d.region.replace(/^主要聚居|^主要分布于|^聚居|^世居|^原居/, '').split(/[，、]/)[0]}</span>
+              <span class="loc" style="display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">${d.region.replace(/^主要聚居|^主要分布于|^聚居|^世居|^原居/, '').split(/[，、]/)[0]}</span>
             </div>
             <span class="card-motif">${d.motif}</span>
             <p class="card-cue">${d.costume}</p>
@@ -1766,6 +2056,7 @@
     function render() {
       grid.innerHTML = DATA.map((d, i) => cardHTML(d, i)).join('');
       applyFilter();
+      updateKnownUI();
     }
 
     /* ---------- 筛选 / 搜索 ---------- */
@@ -1808,8 +2099,9 @@
 
     chips.forEach(chip => {
       chip.addEventListener('click', () => {
-        chips.forEach(c => c.classList.remove('active'));
+        chips.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
         chip.classList.add('active');
+        chip.setAttribute('aria-pressed', 'true');
         activeRegion = chip.dataset.region;
         applyFilter();
       });
@@ -1838,17 +2130,21 @@
     function fillModal(d, idx) {
       const pattern = makePatternSVG(d.color, 1000 + idx);
       modalPattern.style.backgroundImage = `url('${pattern}')`;
-      modalGlyph.textContent = d.name[0];
+      modalGlyph.className = 'glyph glyph-' + Math.min(Math.max(d.name.length, 2), 5);
+      modalGlyph.textContent = d.name;
       modalSeal.textContent = 'N° ' + (idx + 1).toString().padStart(2, '0') + ' / 56';
       modalTitle.textContent = d.name;
       modalPinyin.textContent = d.pinyin;
       modalRegion.textContent = (d.region || '').split(/[，。、]/)[0];
       modalNum.textContent = (idx + 1).toString().padStart(2, '0');
       modalPopulation.textContent = d.population;
+      modalFestival.textContent = d.festival || '—';
       modalMotif.textContent = d.motif;
       modalCostume.textContent = d.costume;
       modalIntro.textContent = d.intro;
+      modalKidFact.textContent = d.kidFact || '';
       modalTags.innerHTML = (d.tags || []).map(t => `<span class="modal-tag">${t}</span>`).join('');
+      syncKnowBtn(d.id);
     }
 
     grid.addEventListener('click', (e) => {
@@ -1870,6 +2166,15 @@
       if (action === 'prev') navModal(-1);
       if (action === 'next') navModal(1);
       if (e.target === modalEl) closeModal();
+      // 朗读按钮：读名字 / 读介绍 / 读趣味知识
+      const sp = e.target.closest('[data-speak]');
+      if (sp && currentIdx >= 0) {
+        const d = DATA[currentIdx];
+        const kind = sp.dataset.speak;
+        if (kind === 'name') speak(d.name);
+        else if (kind === 'kid') speak(d.kidFact);
+        else speak(`${d.name}。${d.kidFact} ${d.intro}`);
+      }
     });
 
     document.addEventListener('keydown', (e) => {
@@ -1921,25 +2226,49 @@
     const QUIZ_TOTAL = 8;
     let quizState = { score: 0, q: 0, order: [], correctCount: 0 };
 
-    function pickN(arr, n, exclude) {
-      const pool = arr.filter(x => x.id !== exclude);
-      const copy = [...pool];
-      for (let i = copy.length - 1; i > 0; i--) {
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [copy[i], copy[j]] = [copy[j], copy[i]];
+        [arr[i], arr[j]] = [arr[j], arr[i]];
       }
-      return copy.slice(0, n);
+      return arr;
+    }
+
+    function pickN(arr, n, exclude) {
+      return shuffle(arr.filter(x => x.id !== exclude)).slice(0, n);
+    }
+
+    // 抽 n 个节日互不重复的民族（避免配对游戏出现两张一样的节日卡）
+    function pickFestivalPairs(n) {
+      const picked = [];
+      const used = new Set();
+      for (const d of shuffle(DATA.slice())) {
+        if (used.has(d.festival)) continue;
+        used.add(d.festival);
+        picked.push(d);
+        if (picked.length === n) break;
+      }
+      return picked;
     }
 
     function startQuiz() {
       quizState = { score: 0, q: 0, order: [], correctCount: 0 };
-      const pool = DATA.slice();
-      for (let i = pool.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [pool[i], pool[j]] = [pool[j], pool[i]];
-      }
-      quizState.order = pool.slice(0, QUIZ_TOTAL);
+      quizState.order = shuffle(DATA.slice()).slice(0, QUIZ_TOTAL);
       renderQuiz();
+    }
+
+    // 四类线索随机一种：节日 / 趣味知识 / 服饰 / 家乡
+    function buildClue(d) {
+      const types = ['festival', 'kid', 'costume', 'region'];
+      const t = types[Math.floor(Math.random() * types.length)];
+      const regionFirst = (d.region || '').split(/[，。、]/)[0];
+      if (t === 'festival') return { label: '节日线索', text: `「${d.festival}」是他们最热闹的节日。` };
+      if (t === 'kid') return { label: '小知识线索', text: d.kidFact };
+      if (t === 'costume') {
+        const c = (d.costume || '').split(/[，；。]/)[0];
+        return { label: '服饰线索', text: `他们的传统服饰：${c}。` };
+      }
+      return { label: '家乡线索', text: `他们的家乡在${regionFirst}。` };
     }
 
     function renderQuiz() {
@@ -1949,17 +2278,9 @@
         return;
       }
       const target = quizState.order[idx];
-      // 干扰项
-      const distractors = pickN(DATA, 3, target.id).map(d => d.id);
-      const optionIds = [...distractors, target.id];
-      // 打乱顺序
-      for (let i = optionIds.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [optionIds[i], optionIds[j]] = [optionIds[j], optionIds[i]];
-      }
-      const targetMotif = target.motif;
-      const targetRegion = (target.region || '').split(/[，。、]/)[0];
-      const clueLine = `服饰主调：${targetMotif}　·　主要聚居于${targetRegion}`;
+      // 干扰项 + 打乱顺序
+      const optionIds = shuffle([...pickN(DATA, 3, target.id).map(d => d.id), target.id]);
+      const clue = buildClue(target);
 
       document.getElementById('quiz-score').textContent = quizState.score;
       document.getElementById('quiz-progress').textContent = `${idx + 1}/${QUIZ_TOTAL}`;
@@ -1967,8 +2288,8 @@
       const body = document.getElementById('quiz-body');
       body.innerHTML = `
         <div class="quiz-prompt">
-          <div class="label">第 ${idx + 1} 题 / 共 ${QUIZ_TOTAL} 题</div>
-          <p class="clue">${clueLine}</p>
+          <div class="label">第 ${idx + 1} 题 · ${clue.label}</div>
+          <p class="clue">${clue.text}</p>
           <p class="meta">请选出对应的民族</p>
         </div>
         <div class="quiz-options">
@@ -2001,17 +2322,25 @@
       if (picked === correctId) {
         quizState.score += 10;
         quizState.correctCount += 1;
-        fb.innerHTML = `✓ 答对啦！这就是 <b>${target.name}</b>。${target.costume.slice(0, 60)}…`;
+        fb.innerHTML = `✓ 答对啦！这就是 <b>${target.name}</b>。${target.kidFact}`;
       } else {
         btn.classList.add('wrong');
-        fb.innerHTML = `✗ 没关系。正确答案是 <b>${target.name}</b>。${target.costume.slice(0, 60)}…`;
+        fb.innerHTML = `✗ 没关系～正确答案是 <b>${target.name}</b>。${target.kidFact}`;
       }
       document.getElementById('quiz-score').textContent = quizState.score;
 
-      setTimeout(() => {
+      // 讲解停留，孩子看完再点「下一题」
+      const last = quizState.q + 1 >= QUIZ_TOTAL;
+      const next = document.createElement('button');
+      next.className = 'quiz-next';
+      next.type = 'button';
+      next.textContent = last ? '看看成绩 →' : '下一题 →';
+      next.addEventListener('click', () => {
         quizState.q += 1;
         renderQuiz();
-      }, 1600);
+      });
+      fb.appendChild(document.createElement('br'));
+      fb.appendChild(next);
     }
 
     function renderQuizEnd() {
@@ -2029,23 +2358,17 @@
     }
 
     /* ===========================================================
-       游戏 2: 翻牌配一配（民族 + 关键词）
+       游戏 2: 翻牌配一配（民族 + 代表节日）
        =========================================================== */
     const MATCH_PAIRS = 6;
     let matchState = { pairs: [], flipped: [], found: 0, flips: 0, locked: false };
 
     function startMatch() {
-      const shuffled = DATA.slice();
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-      }
-      const targets = shuffled.slice(0, MATCH_PAIRS);
-      // 每对：ethnic（民族名） + fest（节庆/特征，从 tags 中随机一个）
-      const pairs = targets.map(d => ({
+      // 每对：ethnic（民族名） + fest（代表节日）
+      const pairs = pickFestivalPairs(MATCH_PAIRS).map(d => ({
         ethnic: d.id,
         ethnicLabel: d.name,
-        fest: d.tags[0] || d.motif,
+        fest: d.festival,
       }));
       matchState = { pairs, flipped: [], found: 0, flips: 0, locked: false };
       renderMatch();
@@ -2054,17 +2377,13 @@
     function renderMatch() {
       document.getElementById('match-found').textContent = matchState.found;
       document.getElementById('match-flips').textContent = matchState.flips;
-      // 卡片数组：每个 pair 拆成 2 张
+      // 卡片数组：每个 pair 拆成 2 张，打乱
       const cards = [];
       matchState.pairs.forEach((p, idx) => {
         cards.push({ key: p.ethnic, type: 'ethnic', label: p.ethnicLabel, pairIdx: idx });
         cards.push({ key: p.ethnic, type: 'fest', label: p.fest, pairIdx: idx });
       });
-      // 打乱
-      for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
-      }
+      shuffle(cards);
       const body = document.getElementById('match-body');
       body.innerHTML = cards.map((c, i) => `
         <div class="match-card" data-i="${i}" data-key="${c.key}" data-type="${c.type}">
@@ -2141,12 +2460,7 @@
     let connectState = { pairs: [], leftSel: null, rightSel: null, found: 0 };
 
     function startConnect() {
-      const shuffled = DATA.slice();
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-      }
-      const targets = shuffled.slice(0, 6);
+      const targets = shuffle(DATA.slice()).slice(0, 6);
       connectState = {
         pairs: targets.map(d => ({ id: d.id, name: d.name, region: (d.region || '').split(/[，。、]/)[0] })),
         leftSel: null,
@@ -2160,19 +2474,17 @@
       document.getElementById('connect-score').textContent = connectState.found;
       const { pairs } = connectState;
       // 右边打乱
-      const rightOrder = pairs.slice();
-      for (let i = rightOrder.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [rightOrder[i], rightOrder[j]] = [rightOrder[j], rightOrder[i]];
-      }
-      const lines = pairs.map((_, i) => '<span class="connect-line">—</span>').join('');
+      const rightOrder = shuffle(pairs.slice());
+      const lines = pairs.map(() => '<span class="connect-line">—</span>').join('');
       const body = document.getElementById('connect-body');
       body.innerHTML = `
         <div class="connect-col" id="connect-left">
+          <div class="connect-h">民族</div>
           ${pairs.map(p => `<div class="connect-node" data-side="left" data-id="${p.id}">${p.name}</div>`).join('')}
         </div>
-        <div class="connect-col" id="connect-mid">${lines}</div>
+        <div class="connect-col" id="connect-mid"><div class="connect-h"></div>${lines}</div>
         <div class="connect-col" id="connect-right">
+          <div class="connect-h">主要聚居地</div>
           ${rightOrder.map(p => `<div class="connect-node" data-side="right" data-id="${p.id}">${p.region}</div>`).join('')}
         </div>
       `;
@@ -2235,31 +2547,20 @@
     }
 
     /* ===========================================================
-       游戏 4: 记忆翻翻乐（20 张卡，10 对 民族+服饰关键词）
+       游戏 4: 记忆翻翻乐（20 张卡，10 对 民族+代表节日）
        =========================================================== */
     const MEMORY_PAIRS = 10;
     let memoryState = { cards: [], flipped: [], timer: 0, found: 0, interval: null, locked: false };
 
     function startMemory() {
       if (memoryState.interval) clearInterval(memoryState.interval);
-      const shuffled = DATA.slice();
-      for (let i = shuffled.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
-      }
-      const targets = shuffled.slice(0, MEMORY_PAIRS);
+      const targets = pickFestivalPairs(MEMORY_PAIRS);
       const cards = [];
       targets.forEach((d, idx) => {
         cards.push({ key: idx, label: d.name, type: 'ethnic' });
-        // 截取服饰特征前 6 个字
-        const snippet = (d.costume || d.intro).replace(/[，。；、「」""'']/g, ' ').split(/\s+/).filter(Boolean).slice(0, 4).join(' ').slice(0, 12);
-        cards.push({ key: idx, label: snippet || d.motif, type: 'costume' });
+        cards.push({ key: idx, label: d.festival, type: 'fest' });
       });
-      // 打乱
-      for (let i = cards.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [cards[i], cards[j]] = [cards[j], cards[i]];
-      }
+      shuffle(cards);
       memoryState = {
         cards, flipped: [], found: 0, timer: 0, locked: false,
         interval: setInterval(() => {
@@ -2326,7 +2627,7 @@
       const div = document.createElement('div');
       div.className = 'celebration';
       div.id = 'memory-end';
-      div.innerHTML = `<h3>${medal}</h3><p>用 <b>${t}</b> 秒记完所有 <b>${MEMORY_PAIRS}</b> 对民族与服饰。</p><button data-action="restart-memory">再来一局</button>`;
+      div.innerHTML = `<h3>${medal}</h3><p>用 <b>${t}</b> 秒记完所有 <b>${MEMORY_PAIRS}</b> 对民族与节日。</p><button data-action="restart-memory">再来一局</button>`;
       panel.appendChild(div);
       div.querySelector('button').addEventListener('click', () => { div.remove(); startMemory(); });
     }
