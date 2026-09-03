@@ -1,0 +1,2375 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>56 个民族图鉴 — foxai</title>
+<meta name="description" content="五十六个民族 · 一部行走的中华衣冠志。一份融合图文、服饰与文化脉络的 56 民族图鉴，致敬中华大地的多元与共美。" />
+<meta name="theme-color" content="#E2571F" />
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23E2571F'/%3E%3Cg fill='none' stroke='white' stroke-width='7.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M23 55V22c0-7.2 5.8-13 13-13h2'/%3E%3Cpath d='M12.5 31h21'/%3E%3C/g%3E%3Ccircle cx='49' cy='9' r='5.5' fill='white'/%3E%3C/svg%3E" />
+<style>
+  /* ===========================================================
+     五十六个民族图鉴 — foxai
+     设计方向：东方纸本质感 + 现代编辑美学
+     主色：Ember #E2571F  ·  副色：宣纸米 #F4EEDC
+     =========================================================== */
+
+  :root {
+    --brand: #E2571F;
+    --brand-2: #FF7A4D;
+    --brand-foreground: #FFFFFF;
+    --brand-muted: rgba(226, 87, 31, 0.10);
+    --brand-ring: rgba(226, 87, 31, 0.35);
+    --brand-glow: rgba(226, 87, 31, 0.45);
+
+    --ink: #1A1714;            /* 主墨色 */
+    --ink-soft: #6B6157;       /* 副墨色 */
+    --ink-faint: #A09588;
+    --line: #E2DCD0;
+    --line-soft: #EDE7DA;
+
+    --surface: #F8F3E7;         /* 主宣纸 */
+    --surface-2: #F2EAD7;      /* 副宣纸 */
+    --surface-3: #EBE0C8;      /* 深宣纸 */
+    --code-bg: #1F1B17;
+    --code-fg: #F5EFE0;
+
+    --shadow-card: 0 1px 0 rgba(255,255,255,0.6) inset, 0 12px 24px -16px rgba(60,40,20,0.18);
+    --shadow-card-hover: 0 1px 0 rgba(255,255,255,0.8) inset, 0 24px 48px -24px rgba(60,40,20,0.28);
+
+    --radius-card: 18px;
+    --radius-control: 10px;
+
+    --font-serif: "Noto Serif SC", "Source Han Serif SC", "Songti SC", "STSong", "FangSong", "STKaiti", serif;
+    --font-display: "Noto Serif SC", "Songti SC", "STSong", serif;
+    --font-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", -apple-system, sans-serif;
+    --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --brand: #FF7A4D;
+      --brand-foreground: #1A1714;
+      --brand-muted: rgba(255, 122, 77, 0.16);
+      --brand-ring: rgba(255, 122, 77, 0.45);
+
+      --ink: #F2EAD7;
+      --ink-soft: #A09588;
+      --ink-faint: #6B6157;
+      --line: #2C2620;
+      --line-soft: #221D17;
+
+      --surface: #1A1714;
+      --surface-2: #221D17;
+      --surface-3: #2A241D;
+      --code-bg: #0F0D0A;
+    }
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+  body {
+    font-family: var(--font-serif);
+    color: var(--ink);
+    background: var(--surface);
+    line-height: 1.6;
+    font-size: 15px;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--brand); color: var(--brand-foreground); }
+
+  /* 宣纸纹理背景 */
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 30%, var(--brand-muted), transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(226,87,31,0.06), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed; inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: multiply;
+    opacity: 0.5;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { position: relative; z-index: 1; max-width: 1320px; margin: 0 auto; padding: 0 28px; }
+
+  /* ===========================================================
+     顶部导航
+     =========================================================== */
+
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: blur(14px) saturate(180%);
+    -webkit-backdrop-filter: blur(14px) saturate(180%);
+    background: color-mix(in oklab, var(--surface) 80%, transparent);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .topbar-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 28px; max-width: 1320px; margin: 0 auto;
+  }
+  .foxai-lockup { display: inline-flex; align-items: center; gap: 10px; }
+  .foxai-lockup svg { display: block; }
+  .foxai-word {
+    font-family: var(--font-display);
+    font-weight: 700; letter-spacing: -0.01em;
+    font-size: 18px; line-height: 1;
+    color: var(--ink);
+  }
+  .foxai-word .ai { color: var(--brand); }
+  .topbar-meta {
+    display: flex; gap: 18px; align-items: center;
+    color: var(--ink-soft); font-size: 12.5px; font-family: var(--font-sans);
+  }
+  .topbar-meta span + span::before { content: '·'; margin-right: 18px; color: var(--ink-faint); }
+
+  /* ===========================================================
+     Hero — 标题区
+     =========================================================== */
+
+  .hero {
+    padding: 80px 0 40px;
+    position: relative;
+  }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.6fr 1fr; gap: 60px;
+    align-items: end;
+  }
+  @media (max-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 28px; }
+    .hero { padding: 48px 0 24px; }
+  }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-sans);
+    font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 22px;
+    padding: 6px 14px;
+    border: 1px solid var(--brand-ring);
+    border-radius: 100px;
+    background: var(--brand-muted);
+  }
+  .hero-eyebrow .dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--brand);
+    box-shadow: 0 0 8px var(--brand-glow);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.85); } }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(46px, 8vw, 104px);
+    line-height: 0.96;
+    margin: 0 0 24px;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .hero-title .red { color: var(--brand); font-style: italic; }
+  .hero-title .small {
+    display: block;
+    font-size: 0.32em;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--ink-soft);
+    margin-top: 14px;
+    font-family: var(--font-sans);
+    text-transform: uppercase;
+  }
+
+  .hero-lede {
+    color: var(--ink-soft);
+    font-size: 16px;
+    line-height: 1.85;
+    max-width: 48ch;
+    margin: 0 0 24px;
+  }
+  .hero-stats {
+    display: flex; gap: 28px; padding-top: 24px;
+    border-top: 1px solid var(--line);
+  }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 36px; font-weight: 700;
+    color: var(--ink); line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .stat-num .unit { font-size: 14px; color: var(--ink-soft); margin-left: 4px; font-weight: 500; letter-spacing: 0; }
+  .stat-label { font-size: 12px; color: var(--ink-soft); margin-top: 6px; font-family: var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; }
+
+  .hero-art {
+    position: relative;
+    aspect-ratio: 1/1.05;
+    border-radius: 24px;
+    overflow: hidden;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+  }
+  .hero-art::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 30% 30%, var(--brand), transparent 50%),
+      radial-gradient(circle at 70% 70%, #5C2A1A, transparent 55%),
+      linear-gradient(180deg, #2C1B17, #5C2A1A 100%);
+    z-index: 0;
+  }
+  .hero-art::after {
+    content: '';
+    position: absolute; inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.85' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+    opacity: 0.7;
+    z-index: 1;
+  }
+  .hero-art .chinese {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2;
+    color: var(--brand-foreground);
+    font-family: var(--font-display);
+    font-size: clamp(120px, 22vw, 240px);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    text-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  }
+  .hero-art .seal {
+    position: absolute; bottom: 20px; right: 20px;
+    width: 72px; height: 72px;
+    background: var(--brand);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--brand-foreground);
+    font-family: var(--font-display);
+    font-size: 36px; font-weight: 700;
+    box-shadow: 0 8px 24px -8px rgba(0,0,0,0.4);
+    z-index: 3;
+  }
+  .hero-art .corner {
+    position: absolute; top: 20px; left: 20px;
+    z-index: 3;
+    color: rgba(255,255,255,0.7);
+    font-family: var(--font-sans);
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+  }
+
+  /* ===========================================================
+     模式切换器 — 学习 / 游戏
+     =========================================================== */
+
+  .mode-switch {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    background: var(--surface-3);
+    border-radius: 100px;
+    border: 1px solid var(--line);
+    font-family: var(--font-sans);
+    font-size: 13px;
+  }
+  .mode-switch button {
+    padding: 8px 18px;
+    border-radius: 100px;
+    border: 0;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.22s;
+    font-family: inherit;
+    font-size: inherit;
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .mode-switch button.active {
+    background: var(--ink);
+    color: var(--surface);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .mode-switch button:not(.active):hover {
+    color: var(--brand);
+  }
+
+  /* ===========================================================
+     游戏容器
+     =========================================================== */
+
+  .game-area {
+    display: none;
+    padding: 36px 0 80px;
+  }
+  .game-area.active { display: block; }
+
+  .game-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .game-card {
+    padding: 24px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    background: var(--surface-2);
+    cursor: pointer;
+    transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s;
+    display: flex; flex-direction: column;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .game-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--brand-ring);
+    box-shadow: var(--shadow-card-hover);
+  }
+  .game-card .num {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--brand);
+    letter-spacing: 0.16em;
+  }
+  .game-card h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .game-card p {
+    font-family: var(--font-serif);
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0;
+    line-height: 1.6;
+  }
+  .game-card .play-arrow {
+    margin-top: auto;
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--brand);
+    padding-top: 8px;
+  }
+
+  /* ---------- 游戏面板 ---------- */
+
+  .game-panel {
+    display: none;
+    padding: 36px 0 80px;
+  }
+  .game-panel.active { display: block; }
+
+  .game-header {
+    display: flex; align-items: end; justify-content: space-between;
+    gap: 24px;
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+  .game-header h2 {
+    font-family: var(--font-display);
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .game-header p {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0;
+    max-width: 60ch;
+  }
+  .game-stats {
+    display: flex; gap: 16px;
+  }
+  .stat-pill {
+    padding: 10px 16px;
+    border-radius: 100px;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+    display: inline-flex; align-items: center; gap: 6px;
+  }
+  .stat-pill b {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--brand);
+  }
+
+  .game-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 14px;
+    border-radius: 100px;
+    border: 1px solid var(--line);
+    background: var(--surface-2);
+    color: var(--ink);
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+    margin-bottom: 16px;
+  }
+  .game-back:hover { color: var(--brand); border-color: var(--brand-ring); }
+
+  /* ---------- 游戏 1: 民族找一找 ---------- */
+
+  .quiz-prompt {
+    padding: 28px 32px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-card);
+    margin-bottom: 24px;
+    position: relative;
+  }
+  .quiz-prompt .label {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 12px;
+  }
+  .quiz-prompt .clue {
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0 0 8px;
+  }
+  .quiz-prompt .meta {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .quiz-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+  }
+  .quiz-option {
+    padding: 22px 18px;
+    border: 2px solid var(--line);
+    border-radius: var(--radius-card);
+    background: var(--surface-2);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s;
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .quiz-option .pin {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .quiz-option:hover {
+    border-color: var(--brand-ring);
+    background: var(--surface);
+    transform: translateY(-2px);
+  }
+  .quiz-option.correct {
+    border-color: #2E7D32;
+    background: #E8F5E9;
+    color: #2E7D32;
+    animation: bounce 0.4s;
+  }
+  .quiz-option.wrong {
+    border-color: #C62828;
+    background: #FFEBEE;
+    color: #C62828;
+    animation: shake 0.4s;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+
+  .quiz-feedback {
+    margin-top: 18px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: var(--surface-3);
+    font-family: var(--font-serif);
+    font-size: 14px;
+    color: var(--ink);
+    display: none;
+    line-height: 1.6;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback b { color: var(--brand); }
+
+  /* ---------- 游戏 2: 服饰配一配 ---------- */
+
+  .match-pairs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+  .match-card {
+    aspect-ratio: 1/1;
+    border: 2px solid var(--line);
+    border-radius: 14px;
+    background: var(--surface-2);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--ink);
+    padding: 16px;
+    text-align: center;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+  }
+  .match-card .face {
+    font-size: 18px;
+    line-height: 1.3;
+  }
+  .match-card .back-icon {
+    font-size: 36px;
+    color: var(--brand);
+    opacity: 0.5;
+  }
+  .match-card.flipped { background: var(--brand-muted); border-color: var(--brand-ring); }
+  .match-card.matched {
+    background: #E8F5E9;
+    border-color: #2E7D32;
+    color: #2E7D32;
+    cursor: default;
+  }
+  .match-card.matched::after {
+    content: '✓';
+    position: absolute;
+    top: 8px; right: 12px;
+    color: #2E7D32;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  .match-card.wrong-pick {
+    background: #FFEBEE;
+    border-color: #C62828;
+    animation: shake 0.4s;
+  }
+  .match-card[data-type="ethnic"] .face { color: var(--brand); }
+
+  /* ---------- 游戏 3: 连连看 ---------- */
+
+  .connect-board {
+    display: grid;
+    grid-template-columns: 1fr 80px 1fr;
+    gap: 12px;
+    align-items: center;
+  }
+  .connect-col {
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .connect-node {
+    padding: 16px 18px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-2);
+    cursor: pointer;
+    transition: all 0.18s;
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    user-select: none;
+  }
+  .connect-node:hover { border-color: var(--brand-ring); }
+  .connect-node.selected {
+    background: var(--brand);
+    color: var(--brand-foreground);
+    border-color: var(--brand);
+  }
+  .connect-node.matched {
+    background: #E8F5E9;
+    border-color: #2E7D32;
+    color: #2E7D32;
+    cursor: default;
+    pointer-events: none;
+  }
+  .connect-line {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    color: var(--ink-faint);
+  }
+  .connect-line.has-match { color: #2E7D32; }
+
+  /* ---------- 游戏 4: 翻牌记忆 ---------- */
+
+  .memory-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  @media (max-width: 720px) {
+    .memory-grid { grid-template-columns: repeat(4, 1fr); }
+  }
+  .mem-card {
+    aspect-ratio: 1/1;
+    border: 2px solid var(--line);
+    border-radius: 12px;
+    background: var(--surface-2);
+    cursor: pointer;
+    position: relative;
+    perspective: 600px;
+    user-select: none;
+  }
+  .mem-card .inner {
+    position: relative;
+    width: 100%; height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+  }
+  .mem-card.flipped .inner,
+  .mem-card.matched .inner {
+    transform: rotateY(180deg);
+  }
+  .mem-card .face, .mem-card .back {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+  }
+  .mem-card .back {
+    background: linear-gradient(135deg, var(--brand), var(--brand-2));
+    color: var(--brand-foreground);
+    font-size: 28px;
+    font-family: var(--font-display);
+    font-weight: 700;
+  }
+  .mem-card .face {
+    transform: rotateY(180deg);
+    background: var(--surface);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .mem-card.matched { border-color: #2E7D32; }
+  .mem-card.matched .face { background: #E8F5E9; color: #2E7D32; }
+  .mem-card.flipped:not(.matched) { border-color: var(--brand-ring); }
+
+  /* ---------- 胜利 ---------- */
+
+  .celebration {
+    margin-top: 32px;
+    padding: 32px;
+    border: 2px dashed var(--brand-ring);
+    border-radius: var(--radius-card);
+    background: var(--brand-muted);
+    text-align: center;
+  }
+  .celebration h3 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    margin: 0 0 8px;
+    color: var(--brand);
+  }
+  .celebration p {
+    color: var(--ink);
+    margin: 0 0 16px;
+  }
+  .celebration button {
+    padding: 12px 24px;
+    border-radius: 100px;
+    border: 0;
+    background: var(--brand);
+    color: var(--brand-foreground);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* ===========================================================
+     控制条 — 搜索 / 筛选
+     =========================================================== */
+
+  .controls {
+    display: flex; gap: 16px; align-items: center;
+    padding: 24px 0;
+    margin-top: 8px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    flex-wrap: wrap;
+  }
+  .search {
+    flex: 1; min-width: 220px;
+    position: relative;
+  }
+  .search input {
+    width: 100%;
+    padding: 14px 18px 14px 44px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-control);
+    background: var(--surface-2);
+    color: var(--ink);
+    font-family: var(--font-serif);
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  }
+  .search input::placeholder { color: var(--ink-faint); }
+  .search input:focus {
+    border-color: var(--brand);
+    background: var(--surface);
+    box-shadow: 0 0 0 4px var(--brand-muted);
+  }
+  .search svg {
+    position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+    color: var(--ink-soft);
+  }
+  .filter-group {
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .filter-chip {
+    padding: 8px 14px;
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    background: transparent;
+    color: var(--ink-soft);
+    font-family: var(--font-serif);
+    font-size: 12.5px;
+    cursor: pointer;
+    transition: all 0.18s;
+  }
+  .filter-chip:hover { color: var(--brand); border-color: var(--brand-ring); }
+  .filter-chip.active {
+    background: var(--ink);
+    color: var(--surface);
+    border-color: var(--ink);
+  }
+  .counter {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--ink-soft);
+    padding-left: 8px;
+    margin-left: auto;
+    white-space: nowrap;
+  }
+  .counter b { color: var(--brand); font-weight: 600; }
+
+  /* ===========================================================
+     卡片网格
+     =========================================================== */
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 18px;
+    padding: 36px 0 80px;
+  }
+
+  .card {
+    position: relative;
+    border-radius: var(--radius-card);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.32s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.32s, border-color 0.32s;
+    will-change: transform;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--brand-ring);
+  }
+  .card:focus-visible {
+    outline: 2px solid var(--brand);
+    outline-offset: 2px;
+  }
+
+  .card-art {
+    aspect-ratio: 1/1.1;
+    position: relative;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .card-art .pattern {
+    position: absolute; inset: 0;
+    opacity: 0.85;
+  }
+  .card-art .glyph {
+    position: relative;
+    z-index: 2;
+    color: rgba(255,255,255,0.94);
+    font-family: var(--font-display);
+    font-size: 80px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    text-shadow: 0 6px 20px rgba(0,0,0,0.35);
+  }
+  .card-art .glyph-en {
+    position: absolute;
+    bottom: 12px; right: 14px;
+    z-index: 3;
+    font-family: var(--font-sans);
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .card-art .seal-mark {
+    position: absolute;
+    top: 12px; left: 12px;
+    z-index: 3;
+    width: 26px; height: 26px;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.92);
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .card-body {
+    padding: 16px 18px 18px;
+    background: var(--surface-2);
+  }
+  .card-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .card-pinyin {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  .card-meta {
+    display: flex; align-items: center; gap: 8px;
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  .card-meta .dot { width: 3px; height: 3px; border-radius: 50%; background: var(--ink-faint); }
+  .card-motif {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--brand);
+    padding: 4px 10px;
+    background: var(--brand-muted);
+    border-radius: 100px;
+    border: 1px solid var(--brand-ring);
+  }
+  .card-cue {
+    margin-top: 10px;
+    font-family: var(--font-serif);
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-tags {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 10px;
+  }
+  .card-tag {
+    font-family: var(--font-sans);
+    font-size: 10.5px;
+    padding: 2px 8px;
+    border-radius: 100px;
+    background: var(--surface-3);
+    color: var(--ink-soft);
+  }
+
+  /* 入场动画 */
+  .card { animation: rise 0.6s cubic-bezier(0.2,0.7,0.2,1) backwards; }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* 隐藏的卡片 */
+  .card.is-hidden { display: none; }
+
+  /* 空状态 */
+  .empty-state {
+    grid-column: 1 / -1;
+    padding: 80px 20px;
+    text-align: center;
+    color: var(--ink-soft);
+    font-family: var(--font-serif);
+  }
+  .empty-state .title { font-size: 22px; color: var(--ink); margin-bottom: 8px; font-family: var(--font-display); }
+
+  /* ===========================================================
+     详情弹窗
+     =========================================================== */
+
+  .modal {
+    position: fixed; inset: 0;
+    background: rgba(15, 10, 8, 0.55);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s;
+  }
+  .modal.open { opacity: 1; pointer-events: auto; }
+  .modal-dialog {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    width: 100%;
+    max-width: 920px;
+    max-height: 92vh;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    box-shadow: 0 32px 80px -24px rgba(0,0,0,0.45);
+    transform: translateY(20px) scale(0.97);
+    transition: transform 0.32s cubic-bezier(0.2,0.7,0.2,1);
+    position: relative;
+  }
+  .modal.open .modal-dialog { transform: translateY(0) scale(1); }
+  @media (max-width: 720px) {
+    .modal-dialog { grid-template-columns: 1fr; max-height: 96vh; }
+  }
+
+  .modal-art {
+    position: relative;
+    min-height: 280px;
+    overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  @media (max-width: 720px) {
+    .modal-art { min-height: 220px; }
+  }
+  .modal-art .pattern {
+    position: absolute; inset: 0;
+    opacity: 0.9;
+  }
+  .modal-art .glyph {
+    position: relative; z-index: 2;
+    font-family: var(--font-display);
+    font-size: 220px;
+    font-weight: 700;
+    line-height: 1;
+    color: rgba(255,255,255,0.94);
+    letter-spacing: -0.05em;
+    text-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  }
+  .modal-art .seal-num {
+    position: absolute;
+    top: 18px; right: 18px;
+    z-index: 3;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(8px);
+    color: rgba(255,255,255,0.92);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    padding: 6px 12px;
+    border-radius: 100px;
+  }
+  .modal-art .corner-label {
+    position: absolute;
+    bottom: 20px; left: 20px;
+    z-index: 3;
+    color: rgba(255,255,255,0.75);
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .modal-body {
+    padding: 32px 36px 36px;
+    overflow-y: auto;
+    max-height: 92vh;
+    background: var(--surface);
+  }
+  @media (max-width: 720px) { .modal-body { padding: 24px 24px 28px; } }
+  .modal-body::-webkit-scrollbar { width: 8px; }
+  .modal-body::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
+
+  .modal-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--brand);
+    margin-bottom: 12px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .modal-eyebrow .num {
+    background: var(--brand);
+    color: var(--brand-foreground);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+  }
+  .modal-title {
+    font-family: var(--font-display);
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0 0 4px;
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    color: var(--ink);
+  }
+  .modal-pinyin {
+    font-family: var(--font-sans);
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    letter-spacing: 0.08em;
+  }
+
+  .modal-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 18px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    margin: 8px 0 24px;
+  }
+  .info-cell .label {
+    font-family: var(--font-sans);
+    font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+  .info-cell .value {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .modal-section {
+    margin-bottom: 22px;
+  }
+  .modal-section h4 {
+    font-family: var(--font-sans);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .modal-section h4::after {
+    content: '';
+    flex: 1; height: 1px;
+    background: var(--line);
+  }
+  .modal-section p {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ink);
+    margin: 0;
+  }
+  .modal-section.costume p {
+    font-family: var(--font-serif);
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--ink);
+    padding-left: 16px;
+    border-left: 3px solid var(--brand);
+  }
+
+  .modal-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    padding-top: 12px;
+  }
+  .modal-tag {
+    font-family: var(--font-sans);
+    font-size: 11.5px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    background: var(--brand-muted);
+    color: var(--brand);
+    border: 1px solid var(--brand-ring);
+  }
+
+  .modal-nav {
+    position: absolute;
+    top: 16px; right: 16px;
+    z-index: 5;
+    display: flex; gap: 8px;
+  }
+  .modal-close,
+  .modal-prev,
+  .modal-next {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    color: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.18s;
+    backdrop-filter: blur(8px);
+  }
+  .modal-close {
+    background: var(--surface);
+  }
+  .modal-prev, .modal-next {
+    position: absolute;
+    top: 50%; transform: translateY(-50%);
+    z-index: 6;
+  }
+  .modal-prev { left: -16px; }
+  .modal-next { right: -16px; }
+  @media (max-width: 720px) {
+    .modal-prev { left: 8px; }
+    .modal-next { right: 8px; }
+  }
+  .modal-prev:hover, .modal-next:hover, .modal-close:hover {
+    background: var(--ink);
+    color: var(--surface);
+    border-color: var(--ink);
+  }
+
+  /* 防止 body 滚动 */
+  body.modal-open { overflow: hidden; }
+
+  /* ===========================================================
+     Footer
+     =========================================================== */
+
+  footer {
+    padding: 60px 0 40px;
+    border-top: 1px solid var(--line);
+    margin-top: 40px;
+    color: var(--ink-soft);
+    font-family: var(--font-sans);
+    font-size: 12.5px;
+  }
+  footer .foot-grid {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 20px;
+  }
+  footer .foot-meta {
+    display: flex; gap: 24px;
+  }
+  footer .foot-meta b { color: var(--ink); font-weight: 600; }
+
+  /* ===========================================================
+     动效相关 keyframes
+     =========================================================== */
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* ===========================================================
+     响应式 — 手机 / 平板 (放在文件末尾以确保 override 基础规则)
+     =========================================================== */
+@media (max-width: 900px) {
+  .wrap { padding: 0 20px; }
+  .topbar-inner { padding: 12px 20px; }
+  .topbar-meta { display: none; }
+
+  .hero { padding: 56px 0 24px; }
+  .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+  .hero-art { aspect-ratio: 1/0.85; max-width: 480px; }
+  .hero-art .chinese { font-size: clamp(80px, 18vw, 160px); }
+
+  .controls { padding: 18px 0; gap: 12px; }
+  .search { min-width: 100%; order: 1; flex-basis: 100%; }
+  .filter-group { order: 3; flex-basis: 100%; justify-content: flex-start; }
+  .counter { order: 2; padding-left: 0; }
+  .mode-switch { order: 0; }
+
+  .grid { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; padding: 24px 0 60px; }
+  .game-grid { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .game-card { padding: 20px; }
+  .game-card h3 { font-size: 19px; }
+
+  .connect-board { grid-template-columns: 1fr 50px 1fr; gap: 8px; }
+  .connect-node { padding: 14px 14px; font-size: 16px; }
+
+  .memory-grid { grid-template-columns: repeat(5, 1fr); max-width: 100%; }
+
+  .game-header h2 { font-size: 28px; }
+  .game-header p { font-size: 13px; }
+  .game-stats { gap: 10px; }
+  .stat-pill { padding: 8px 12px; font-size: 11px; }
+  .stat-pill b { font-size: 14px; }
+}
+@media (max-width: 640px) {
+  body { font-size: 14.5px; }
+  .wrap { padding: 0 16px; }
+  .topbar-inner { padding: 10px 16px; }
+  .foxai-word { font-size: 16px; }
+
+  .hero { padding: 36px 0 20px; }
+  .hero-eyebrow { font-size: 10px; padding: 5px 12px; margin-bottom: 18px; letter-spacing: 0.18em; }
+  .hero-title { font-size: clamp(40px, 12vw, 56px); }
+  .hero-title .small { font-size: 0.32em; margin-top: 10px; letter-spacing: 0.14em; }
+  .hero-lede { font-size: 14.5px; line-height: 1.75; }
+  .hero-stats { gap: 16px; flex-wrap: wrap; }
+  .stat-num { font-size: 26px; }
+  .stat-label { font-size: 10.5px; }
+
+  .hero-art { aspect-ratio: 1/0.9; max-width: 100%; }
+  .hero-art .chinese { font-size: clamp(64px, 22vw, 110px); }
+  .hero-art .corner { font-size: 10px; top: 12px; left: 12px; }
+  .hero-art .seal { width: 56px; height: 56px; font-size: 28px; bottom: 14px; right: 14px; }
+
+  .controls { padding: 14px 0; gap: 10px; }
+  .mode-switch button { padding: 7px 12px; font-size: 12px; gap: 5px; }
+  .mode-switch button svg { width: 12px; height: 12px; }
+  .filter-chip { padding: 6px 12px; font-size: 11.5px; }
+  .search input { padding: 12px 14px 12px 38px; font-size: 13px; }
+  .counter { font-size: 11px; width: 100%; text-align: left; }
+
+  .grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; padding: 18px 0 60px; }
+  .card-body { padding: 12px 12px 14px; }
+  .card-name { font-size: 17px; }
+  .card-pinyin { font-size: 10px; margin-bottom: 8px; }
+  .card-meta { font-size: 10.5px; }
+  .card-motif { font-size: 9.5px; padding: 3px 8px; }
+  .card-cue { display: none; }
+  .card-tags { display: none; }
+  .card-art .glyph { font-size: 52px; }
+  .card-art .glyph-en { font-size: 9.5px; }
+
+  .modal { padding: 12px; }
+  .modal-dialog { grid-template-columns: 1fr; max-height: 96vh; border-radius: 18px; }
+  .modal-art { min-height: 180px; }
+  .modal-art .glyph { font-size: 140px; }
+  .modal-art .corner-label { font-size: 9px; bottom: 14px; left: 14px; }
+  .modal-art .seal-num { font-size: 10px; top: 14px; right: 14px; }
+  .modal-body { padding: 22px 22px 26px; }
+  .modal-title { font-size: 30px; }
+  .modal-info-grid { gap: 14px; padding: 14px 0; margin: 4px 0 18px; }
+  .modal-section h4 { font-size: 10px; }
+  .modal-section p { font-size: 13.5px; line-height: 1.7; }
+  .modal-section.costume p { padding-left: 12px; }
+
+  .game-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; }
+  .game-card { padding: 16px 16px; flex-direction: column; align-items: stretch; gap: 10px; }
+  .game-card h3 { font-size: 16px; }
+  .game-card p { font-size: 11.5px; line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .game-card .play-arrow { font-size: 11px; }
+
+  .game-panel { padding: 18px 0 60px; }
+  .game-header { padding-bottom: 14px; margin-bottom: 18px; gap: 12px; }
+  .game-header h2 { font-size: 22px; }
+  .game-header p { font-size: 12.5px; }
+  .game-stats { gap: 8px; }
+  .stat-pill { font-size: 10.5px; padding: 6px 10px; }
+  .stat-pill b { font-size: 13px; }
+
+  .quiz-prompt { padding: 20px 18px; }
+  .quiz-prompt .clue { font-size: 17px; line-height: 1.5; }
+  .quiz-options { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .quiz-option { padding: 16px 8px; font-size: 16px; }
+  .quiz-option .pin { font-size: 9.5px; }
+
+  .match-pairs { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .match-card .face { font-size: 14px; }
+
+  .connect-board { grid-template-columns: 1fr !important; gap: 4px; }
+  .connect-board > #connect-mid { display: none; }
+  .connect-board > .connect-col + .connect-col { margin-top: 12px; }
+  .connect-node { padding: 12px 14px; font-size: 15px; }
+
+  .memory-grid { grid-template-columns: repeat(4, 1fr) !important; gap: 8px; }
+  .mem-card .back { font-size: 22px; }
+  .mem-card .face { font-size: 13px; }
+
+  .celebration { padding: 22px; }
+  .celebration h3 { font-size: 22px; }
+
+  footer { padding: 40px 0 28px; }
+  .foot-grid { flex-direction: column; align-items: flex-start; gap: 14px; }
+  .foot-meta { flex-wrap: wrap; gap: 14px; font-size: 11.5px; }
+}
+@media (max-width: 380px) {
+  .hero-title { font-size: 38px; }
+  .hero-art .chinese { font-size: 60px; }
+  .stat-num { font-size: 22px; }
+  .filter-chip { padding: 5px 10px; font-size: 11px; }
+  .quiz-option { font-size: 14px; padding: 14px 6px; }
+  .connect-node { font-size: 13.5px; padding: 10px 12px; }
+}
+@media (max-height: 500px) and (orientation: landscape) {
+  .hero-grid { grid-template-columns: 1.2fr 1fr; gap: 28px; }
+  .hero { padding: 28px 0 16px; }
+  .hero-title { font-size: clamp(36px, 6vw, 64px); }
+  .hero-art { aspect-ratio: 1/0.8; }
+}
+</style>
+</head>
+<body>
+
+<!-- ===========================================================
+     Top bar — foxai lockup
+     =========================================================== -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="foxai-lockup" href="/" aria-label="foxai">
+      <svg width="28" height="28" viewBox="0 0 64 64" aria-hidden="true">
+        <g fill="none" stroke="var(--brand)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M23 55V22c0-7.2 5.8-13 13-13h2"/>
+          <path d="M12.5 31h21"/>
+        </g>
+        <circle cx="49" cy="9" r="5.5" fill="var(--brand)"/>
+      </svg>
+      <span class="foxai-word">fox<span class="ai">ai</span></span>
+    </a>
+    <div class="topbar-meta">
+      <span>Vol. 56</span>
+      <span>中国民族图鉴</span>
+      <span>2026 Edition</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-eyebrow">
+            <span class="dot"></span>
+            中国民族图鉴 · 56 个民族 · 一部行走的衣冠志
+          </div>
+          <h1 class="hero-title">
+            五十<span class="red">六</span>族
+            <span class="small">From Yellow River to Snow Plateau</span>
+          </h1>
+          <p class="hero-lede">
+            雪山之下有袍，竹楼之间有歌。一份图文交织的中华衣冠志，
+            致敬五十六个民族在山河间共同织出的多元画卷。
+            点开任意一张卡片，看见一段服饰、一种节庆、一句山歌。
+          </p>
+          <div class="hero-stats">
+            <div>
+              <div class="stat-num">56<span class="unit">族</span></div>
+              <div class="stat-label">国家核定民族</div>
+            </div>
+            <div>
+              <div class="stat-num">9.6<span class="unit">百万 km²</span></div>
+              <div class="stat-label">共同家园</div>
+            </div>
+            <div>
+              <div class="stat-num">∞</div>
+              <div class="stat-label">绣样与银光</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-art">
+          <span class="corner">N° 56 / 五十六</span>
+          <span class="chinese">衣冠</span>
+          <span class="seal">共</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <!-- ===========================================================
+         模式切换 + 控制条
+         =========================================================== -->
+    <div class="controls" role="search">
+      <div class="mode-switch" role="tablist" aria-label="模式切换">
+        <button class="active" data-mode="learn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+          </svg>
+          学习模式
+        </button>
+        <button data-mode="play">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 11h4V5a2 2 0 1 1 4 0v6h4a2 2 0 0 1 2 2v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4v-6a2 2 0 0 1 2-2z"/>
+          </svg>
+          游戏模式
+        </button>
+      </div>
+      <div class="search" id="search-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+        </svg>
+        <input id="search-input" type="search" placeholder="搜索民族名 / 拼音 / 节庆 / 服饰关键词" aria-label="搜索民族" />
+      </div>
+      <div class="filter-group" id="filter-wrap" role="tablist" aria-label="地域筛选">
+        <button class="filter-chip active" data-region="all">全部</button>
+        <button class="filter-chip" data-region="northwest">北方</button>
+        <button class="filter-chip" data-region="tibet">青藏</button>
+        <button class="filter-chip" data-region="south">南方</button>
+      </div>
+      <div class="counter" id="counter-wrap" aria-live="polite">
+        显示 <b id="visible-count">56</b> / 56
+      </div>
+    </div>
+
+    <!-- ===========================================================
+         学习视图
+         =========================================================== -->
+    <div id="learn-view">
+      <div class="grid" id="grid" role="list"></div>
+    </div>
+
+    <!-- ===========================================================
+         游戏视图
+         =========================================================== -->
+    <div id="play-view" style="display:none;">
+      <!-- 游戏选择 -->
+      <div class="game-area active" id="game-menu">
+        <div class="game-grid">
+          <div class="game-card" data-game="quiz">
+            <span class="num">N° 01</span>
+            <h3>民族找一找</h3>
+            <p>看到服饰线索，把对应的民族挑出来。</p>
+            <span class="play-arrow">开始挑战 →</span>
+          </div>
+          <div class="game-card" data-game="match">
+            <span class="num">N° 02</span>
+            <h3>翻牌配一配</h3>
+            <p>翻开两张卡，找出民族和它的节庆。</p>
+            <span class="play-arrow">开始挑战 →</span>
+          </div>
+          <div class="game-card" data-game="connect">
+            <span class="num">N° 03</span>
+            <h3>连连看</h3>
+            <p>把民族名与它的居住地区连成一对。</p>
+            <span class="play-arrow">开始挑战 →</span>
+          </div>
+          <div class="game-card" data-game="memory">
+            <span class="num">N° 04</span>
+            <h3>记忆翻翻乐</h3>
+            <p>翻牌找到所有民族与服饰的搭配。</p>
+            <span class="play-arrow">开始挑战 →</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 游戏 1: 民族找一找 -->
+      <div class="game-panel" id="game-quiz">
+        <button class="game-back" data-action="back">← 返回游戏菜单</button>
+        <div class="game-header">
+          <div>
+            <h2>民族找一找</h2>
+            <p>看服饰特征，从候选里挑出答案。每答一题 +10 分，连续答对还会加分哦！</p>
+          </div>
+          <div class="game-stats">
+            <span class="stat-pill">得分 <b id="quiz-score">0</b></span>
+            <span class="stat-pill">题号 <b id="quiz-progress">1/8</b></span>
+          </div>
+        </div>
+        <div id="quiz-body"></div>
+      </div>
+
+      <!-- 游戏 2: 翻牌配一配 -->
+      <div class="game-panel" id="game-match">
+        <button class="game-back" data-action="back">← 返回游戏菜单</button>
+        <div class="game-header">
+          <div>
+            <h2>翻牌配一配</h2>
+            <p>翻开一张民族卡，再翻开一张节庆卡，配对成功就消失。翻开数越少，分数越高！</p>
+          </div>
+          <div class="game-stats">
+            <span class="stat-pill">配对 <b id="match-found">0</b>/6</span>
+            <span class="stat-pill">翻牌 <b id="match-flips">0</b></span>
+          </div>
+        </div>
+        <div id="match-body" class="match-pairs"></div>
+      </div>
+
+      <!-- 游戏 3: 连连看 -->
+      <div class="game-panel" id="game-connect">
+        <button class="game-back" data-action="back">← 返回游戏菜单</button>
+        <div class="game-header">
+          <div>
+            <h2>连连看</h2>
+            <p>左边挑一个民族，右边挑它主要的聚居地区，连对得分。</p>
+          </div>
+          <div class="game-stats">
+            <span class="stat-pill">得分 <b id="connect-score">0</b>/6</span>
+          </div>
+        </div>
+        <div class="connect-board" id="connect-body"></div>
+      </div>
+
+      <!-- 游戏 4: 记忆翻翻乐 -->
+      <div class="game-panel" id="game-memory">
+        <button class="game-back" data-action="back">← 返回游戏菜单</button>
+        <div class="game-header">
+          <div>
+            <h2>记忆翻翻乐</h2>
+            <p>20 张卡里藏着 10 对「民族 + 服饰关键词」，记位置、找配对，全部找到就通关！</p>
+          </div>
+          <div class="game-stats">
+            <span class="stat-pill">配对 <b id="memory-found">0</b>/10</span>
+            <span class="stat-pill">用时 <b id="memory-time">0</b>s</span>
+          </div>
+        </div>
+        <div id="memory-body" class="memory-grid"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ===========================================================
+     详情弹窗
+     =========================================================== -->
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal-dialog">
+    <button class="modal-close" aria-label="关闭" data-action="close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6 18 18M18 6 6 18"/></svg>
+    </button>
+    <button class="modal-prev" aria-label="上一个" data-action="prev">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m15 6-6 6 6 6"/></svg>
+    </button>
+    <button class="modal-next" aria-label="下一个" data-action="next">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>
+    </button>
+
+    <div class="modal-art" id="modal-art">
+      <div class="pattern" id="modal-pattern"></div>
+      <span class="glyph" id="modal-glyph"></span>
+      <span class="seal-num" id="modal-seal">N° —</span>
+      <span class="corner-label">A People's Atlas</span>
+    </div>
+
+    <div class="modal-body">
+      <div class="modal-eyebrow">
+        <span class="num" id="modal-num">—</span>
+        <span id="modal-region">—</span>
+      </div>
+      <h2 class="modal-title" id="modal-title">—</h2>
+      <div class="modal-pinyin" id="modal-pinyin">—</div>
+
+      <div class="modal-info-grid">
+        <div class="info-cell">
+          <div class="label">人口</div>
+          <div class="value" id="modal-population">—</div>
+        </div>
+        <div class="info-cell">
+          <div class="label">主色调</div>
+          <div class="value" id="modal-motif">—</div>
+        </div>
+      </div>
+
+      <div class="modal-section costume">
+        <h4>典型服饰</h4>
+        <p id="modal-costume">—</p>
+      </div>
+
+      <div class="modal-section">
+        <h4>文化概览</h4>
+        <p id="modal-intro">—</p>
+      </div>
+
+      <div class="modal-section">
+        <h4>关键词</h4>
+        <div class="modal-tags" id="modal-tags"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <span style="color:var(--ink); font-weight:600;">fox<span style="color:var(--brand)">ai</span></span>
+        <span style="margin-left:14px;">One key. Every model.</span>
+      </div>
+      <div class="foot-meta">
+        <span>数据：综合官方公开资料</span>
+        <span>设计：<b>Ember Brand</b></span>
+        <span>© 2026</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="./ethnic-groups.js"></script>
+<script>
+    /* ===========================================================
+       应用脚本
+       =========================================================== */
+
+    const MODE = { learn: 'learn', play: 'play' };
+    let currentMode = MODE.learn;
+
+    const DATA = window.ETHNIC_DATA || [];
+    const grid = document.getElementById('grid');
+    const search = document.getElementById('search-input');
+    const chips = document.querySelectorAll('.filter-chip');
+    const visibleCount = document.getElementById('visible-count');
+    const learnView = document.getElementById('learn-view');
+    const playView = document.getElementById('play-view');
+    const modeBtns = document.querySelectorAll('.mode-switch button');
+    const searchWrap = document.getElementById('search-wrap');
+    const filterWrap = document.getElementById('filter-wrap');
+    const counterWrap = document.getElementById('counter-wrap');
+
+    const modalEl = document.getElementById('modal');
+    const modalGlyph = document.getElementById('modal-glyph');
+    const modalPattern = document.getElementById('modal-pattern');
+    const modalSeal = document.getElementById('modal-seal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalPinyin = document.getElementById('modal-pinyin');
+    const modalRegion = document.getElementById('modal-region');
+    const modalNum = document.getElementById('modal-num');
+    const modalPopulation = document.getElementById('modal-population');
+    const modalMotif = document.getElementById('modal-motif');
+    const modalCostume = document.getElementById('modal-costume');
+    const modalIntro = document.getElementById('modal-intro');
+    const modalTags = document.getElementById('modal-tags');
+
+    /* ---------- 按地域归类 ---------- */
+    function regionOf(name) {
+      const n = name || '';
+      if (/内蒙古|新疆|宁夏|广西|黑龙江|吉林|辽宁|河北|甘肃|河南|山东|山西|陕西/.test(n)) return 'north';
+      if (/云南|贵州|四川|重庆|湖南|湖北|广东|广西|福建|浙江|江西|安徽|海南|台湾/.test(n)) return 'south';
+      if (/内蒙古|新疆|甘肃|宁夏/.test(n)) return 'northwest';
+      if (/西藏|青海|四川|甘肃|云南/.test(n)) return 'tibet';
+      return 'south';
+    }
+    // 简化规则：以上分类有歧义，统一用更精确的二级分类
+    function regionOfClean(d) {
+      const r = (d.region || '').toLowerCase();
+      if (r.includes('西藏') || r.includes('涉藏') || r.includes('青海')) return 'tibet';
+      if (r.includes('内蒙古') || r.includes('新疆') || r.includes('宁夏') || r.includes('甘肃') || r.includes('黑龙江') || r.includes('吉林') || r.includes('辽宁') || r.includes('河北')) return 'northwest';
+      return 'south';
+    }
+
+    /* ---------- 卡片渲染 ---------- */
+    function makePatternSVG(color, seed) {
+      // 用纯 SVG 做一个抽象「织锦/纹样」图案,作为卡片背景。
+      const id = 'p' + seed;
+      const light = color + 'BB';
+      const dark = color;
+      const svg = `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <pattern id="${id}" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+              <rect width="40" height="40" fill="${dark}"/>
+              <path d="M0 20 L10 10 L20 20 L30 10 L40 20" stroke="${light}" stroke-width="1.5" fill="none"/>
+              <circle cx="20" cy="20" r="3" fill="${light}"/>
+              <path d="M0 0 L40 40 M40 0 L0 40" stroke="${light}" stroke-width="0.6" opacity="0.45"/>
+            </pattern>
+            <radialGradient id="g${seed}" cx="50%" cy="35%" r="80%">
+              <stop offset="0%" stop-color="${color}" stop-opacity="1"/>
+              <stop offset="100%" stop-color="${shadeColor(color, -30)}" stop-opacity="1"/>
+            </radialGradient>
+          </defs>
+          <rect width="200" height="200" fill="url(#g${seed})"/>
+          <rect width="200" height="200" fill="url(#${id})" opacity="0.55"/>
+        </svg>`;
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
+    function shadeColor(hex, amt) {
+      let h = hex.replace('#', '');
+      let r = parseInt(h.substring(0, 2), 16);
+      let g = parseInt(h.substring(2, 4), 16);
+      let b = parseInt(h.substring(4, 6), 16);
+      r = Math.max(0, Math.min(255, r + amt));
+      g = Math.max(0, Math.min(255, g + amt));
+      b = Math.max(0, Math.min(255, b + amt));
+      return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+    }
+
+    function cardHTML(d, idx) {
+      const pattern = makePatternSVG(d.color, idx);
+      return `
+        <article class="card" data-id="${d.id}" data-region="${regionOfClean(d)}"
+                 data-search="${(d.name + ' ' + d.pinyin + ' ' + d.intro + ' ' + (d.tags || []).join(' ') + ' ' + d.costume).toLowerCase()}"
+                 role="listitem" tabindex="0"
+                 aria-label="${d.name} — ${d.pinyin}">
+          <div class="card-art" style="background-image: url('${pattern}');">
+            <span class="seal-mark">${d.name[0]}</span>
+            <span class="glyph">${d.name[0]}</span>
+            <span class="glyph-en">${d.pinyin.split(' ')[0]}</span>
+          </div>
+          <div class="card-body">
+            <h3 class="card-name">${d.name}</h3>
+            <div class="card-pinyin">${d.pinyin}</div>
+            <div class="card-meta">
+              <span>${d.population}</span>
+              <span class="dot"></span>
+              <span style="display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;overflow:hidden;">${d.region.replace(/^主要聚居|^主要分布于|^聚居|^世居|^原居/, '').split(/[，、]/)[0]}</span>
+            </div>
+            <span class="card-motif">${d.motif}</span>
+            <p class="card-cue">${d.costume}</p>
+            <div class="card-tags">${(d.tags || []).slice(0, 3).map(t => `<span class="card-tag">${t}</span>`).join('')}</div>
+          </div>
+        </article>
+      `;
+    }
+
+    function render() {
+      grid.innerHTML = DATA.map((d, i) => cardHTML(d, i)).join('');
+      applyFilter();
+    }
+
+    /* ---------- 筛选 / 搜索 ---------- */
+    let activeRegion = 'all';
+    let activeQuery = '';
+
+    function applyFilter() {
+      const cards = grid.querySelectorAll('.card');
+      let visible = 0;
+      cards.forEach((card) => {
+        const matchesRegion = activeRegion === 'all' || card.dataset.region === activeRegion;
+        const matchesQuery = !activeQuery || card.dataset.search.includes(activeQuery);
+        if (matchesRegion && matchesQuery) {
+          card.classList.remove('is-hidden');
+          visible++;
+        } else {
+          card.classList.add('is-hidden');
+        }
+      });
+      visibleCount.textContent = visible;
+
+      // 空状态
+      let emptyEl = grid.querySelector('.empty-state');
+      if (visible === 0) {
+        if (!emptyEl) {
+          emptyEl = document.createElement('div');
+          emptyEl.className = 'empty-state';
+          emptyEl.innerHTML = '<div class="title">未找到匹配的卡片</div><div>试着换个关键词或地区筛选</div>';
+          grid.appendChild(emptyEl);
+        }
+      } else if (emptyEl) {
+        emptyEl.remove();
+      }
+    }
+
+    search.addEventListener('input', (e) => {
+      activeQuery = e.target.value.trim().toLowerCase();
+      applyFilter();
+    });
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        activeRegion = chip.dataset.region;
+        applyFilter();
+      });
+    });
+
+    /* ---------- 详情弹窗 ---------- */
+    let currentIdx = -1;
+
+    function openModal(id) {
+      const idx = DATA.findIndex(d => d.id === id);
+      if (idx < 0) return;
+      currentIdx = idx;
+      fillModal(DATA[idx], idx);
+      modalEl.classList.add('open');
+      document.body.classList.add('modal-open');
+    }
+    function closeModal() {
+      modalEl.classList.remove('open');
+      document.body.classList.remove('modal-open');
+    }
+    function navModal(delta) {
+      if (currentIdx < 0) return;
+      currentIdx = (currentIdx + delta + DATA.length) % DATA.length;
+      fillModal(DATA[currentIdx], currentIdx);
+    }
+    function fillModal(d, idx) {
+      const pattern = makePatternSVG(d.color, 1000 + idx);
+      modalPattern.style.backgroundImage = `url('${pattern}')`;
+      modalGlyph.textContent = d.name[0];
+      modalSeal.textContent = 'N° ' + (idx + 1).toString().padStart(2, '0') + ' / 56';
+      modalTitle.textContent = d.name;
+      modalPinyin.textContent = d.pinyin;
+      modalRegion.textContent = (d.region || '').split(/[，。、]/)[0];
+      modalNum.textContent = (idx + 1).toString().padStart(2, '0');
+      modalPopulation.textContent = d.population;
+      modalMotif.textContent = d.motif;
+      modalCostume.textContent = d.costume;
+      modalIntro.textContent = d.intro;
+      modalTags.innerHTML = (d.tags || []).map(t => `<span class="modal-tag">${t}</span>`).join('');
+    }
+
+    grid.addEventListener('click', (e) => {
+      const card = e.target.closest('.card');
+      if (card) openModal(card.dataset.id);
+    });
+    grid.addEventListener('keydown', (e) => {
+      if (e.key !== 'Enter' && e.key !== ' ') return;
+      const card = e.target.closest('.card');
+      if (card) {
+        e.preventDefault();
+        openModal(card.dataset.id);
+      }
+    });
+
+    modalEl.addEventListener('click', (e) => {
+      const action = e.target.closest('[data-action]')?.dataset.action;
+      if (action === 'close') closeModal();
+      if (action === 'prev') navModal(-1);
+      if (action === 'next') navModal(1);
+      if (e.target === modalEl) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!modalEl.classList.contains('open')) return;
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') navModal(-1);
+      if (e.key === 'ArrowRight') navModal(1);
+    });
+
+    /* ---------- 启动 ---------- */
+    render();
+
+    /* ===========================================================
+       模式切换
+       =========================================================== */
+    modeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const mode = btn.dataset.mode;
+        if (mode === currentMode) return;
+        currentMode = mode;
+        modeBtns.forEach(b => b.classList.toggle('active', b === btn));
+        if (mode === MODE.learn) {
+          learnView.style.display = '';
+          playView.style.display = 'none';
+          searchWrap.style.display = '';
+          filterWrap.style.display = '';
+          counterWrap.style.display = '';
+        } else {
+          learnView.style.display = 'none';
+          playView.style.display = '';
+          searchWrap.style.display = 'none';
+          filterWrap.style.display = 'none';
+          counterWrap.style.display = 'none';
+          showGameMenu();
+      }
+      });
+    });
+
+    function showGameMenu() {
+      ['game-quiz','game-match','game-connect','game-memory'].forEach(id => {
+        document.getElementById(id).classList.remove('active');
+      });
+      document.getElementById('game-menu').classList.add('active');
+    }
+
+    /* ===========================================================
+       游戏 1: 民族找一找（单选服饰线索）
+       =========================================================== */
+    const QUIZ_TOTAL = 8;
+    let quizState = { score: 0, q: 0, order: [], correctCount: 0 };
+
+    function pickN(arr, n, exclude) {
+      const pool = arr.filter(x => x.id !== exclude);
+      const copy = [...pool];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy.slice(0, n);
+    }
+
+    function startQuiz() {
+      quizState = { score: 0, q: 0, order: [], correctCount: 0 };
+      const pool = DATA.slice();
+      for (let i = pool.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [pool[i], pool[j]] = [pool[j], pool[i]];
+      }
+      quizState.order = pool.slice(0, QUIZ_TOTAL);
+      renderQuiz();
+    }
+
+    function renderQuiz() {
+      const idx = quizState.q;
+      if (idx >= QUIZ_TOTAL) {
+        renderQuizEnd();
+        return;
+      }
+      const target = quizState.order[idx];
+      // 干扰项
+      const distractors = pickN(DATA, 3, target.id).map(d => d.id);
+      const optionIds = [...distractors, target.id];
+      // 打乱顺序
+      for (let i = optionIds.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [optionIds[i], optionIds[j]] = [optionIds[j], optionIds[i]];
+      }
+      const targetMotif = target.motif;
+      const targetRegion = (target.region || '').split(/[，。、]/)[0];
+      const clueLine = `服饰主调：${targetMotif}　·　主要聚居于${targetRegion}`;
+
+      document.getElementById('quiz-score').textContent = quizState.score;
+      document.getElementById('quiz-progress').textContent = `${idx + 1}/${QUIZ_TOTAL}`;
+
+      const body = document.getElementById('quiz-body');
+      body.innerHTML = `
+        <div class="quiz-prompt">
+          <div class="label">第 ${idx + 1} 题 / 共 ${QUIZ_TOTAL} 题</div>
+          <p class="clue">${clueLine}</p>
+          <p class="meta">请选出对应的民族</p>
+        </div>
+        <div class="quiz-options">
+          ${optionIds.map(id => {
+            const d = DATA.find(x => x.id === id);
+            return `<button class="quiz-option" data-id="${id}">
+              ${d.name}
+              <span class="pin">${d.pinyin}</span>
+            </button>`;
+          }).join('')}
+        </div>
+        <div class="quiz-feedback" id="quiz-feedback"></div>
+      `;
+      body.querySelectorAll('.quiz-option').forEach(btn => {
+        btn.addEventListener('click', () => onQuizPick(btn, target.id));
+      });
+    }
+
+    function onQuizPick(btn, correctId) {
+      const picked = btn.dataset.id;
+      const opts = document.querySelectorAll('#quiz-body .quiz-option');
+      opts.forEach(o => {
+        o.style.pointerEvents = 'none';
+        if (o.dataset.id === correctId) o.classList.add('correct');
+      });
+      const fb = document.getElementById('quiz-feedback');
+      fb.classList.add('show');
+      const target = DATA.find(d => d.id === correctId);
+
+      if (picked === correctId) {
+        quizState.score += 10;
+        quizState.correctCount += 1;
+        fb.innerHTML = `✓ 答对啦！这就是 <b>${target.name}</b>。${target.costume.slice(0, 60)}…`;
+      } else {
+        btn.classList.add('wrong');
+        fb.innerHTML = `✗ 没关系。正确答案是 <b>${target.name}</b>。${target.costume.slice(0, 60)}…`;
+      }
+      document.getElementById('quiz-score').textContent = quizState.score;
+
+      setTimeout(() => {
+        quizState.q += 1;
+        renderQuiz();
+      }, 1600);
+    }
+
+    function renderQuizEnd() {
+      const body = document.getElementById('quiz-body');
+      const pct = Math.round((quizState.correctCount / QUIZ_TOTAL) * 100);
+      const medal = pct === 100 ? '🏆 全对！' : pct >= 75 ? '🌟 优秀' : pct >= 50 ? '👍 还行' : '💪 加油';
+      body.innerHTML = `
+        <div class="celebration">
+          <h3>${medal}</h3>
+          <p>你在 <b>${QUIZ_TOTAL}</b> 道题里答对了 <b>${quizState.correctCount}</b> 道，得分 <b>${quizState.score}</b> 分。</p>
+          <button data-action="restart-quiz">再玩一轮</button>
+        </div>
+      `;
+      body.querySelector('button[data-action="restart-quiz"]').addEventListener('click', startQuiz);
+    }
+
+    /* ===========================================================
+       游戏 2: 翻牌配一配（民族 + 关键词）
+       =========================================================== */
+    const MATCH_PAIRS = 6;
+    let matchState = { pairs: [], flipped: [], found: 0, flips: 0, locked: false };
+
+    function startMatch() {
+      const shuffled = DATA.slice();
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      const targets = shuffled.slice(0, MATCH_PAIRS);
+      // 每对：ethnic（民族名） + fest（节庆/特征，从 tags 中随机一个）
+      const pairs = targets.map(d => ({
+        ethnic: d.id,
+        ethnicLabel: d.name,
+        fest: d.tags[0] || d.motif,
+      }));
+      matchState = { pairs, flipped: [], found: 0, flips: 0, locked: false };
+      renderMatch();
+    }
+
+    function renderMatch() {
+      document.getElementById('match-found').textContent = matchState.found;
+      document.getElementById('match-flips').textContent = matchState.flips;
+      // 卡片数组：每个 pair 拆成 2 张
+      const cards = [];
+      matchState.pairs.forEach((p, idx) => {
+        cards.push({ key: p.ethnic, type: 'ethnic', label: p.ethnicLabel, pairIdx: idx });
+        cards.push({ key: p.ethnic, type: 'fest', label: p.fest, pairIdx: idx });
+      });
+      // 打乱
+      for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+      }
+      const body = document.getElementById('match-body');
+      body.innerHTML = cards.map((c, i) => `
+        <div class="match-card" data-i="${i}" data-key="${c.key}" data-type="${c.type}">
+          <span class="back-icon">?</span>
+          <span class="face" style="display:none;">${c.label}</span>
+        </div>
+      `).join('');
+      body.querySelectorAll('.match-card').forEach(card => {
+        card.addEventListener('click', () => onMatchFlip(card));
+      });
+    }
+
+    function onMatchFlip(card) {
+      if (matchState.locked) return;
+      if (card.classList.contains('matched') || card.classList.contains('flipped')) return;
+      card.classList.add('flipped');
+      card.querySelector('.back-icon').style.display = 'none';
+      card.querySelector('.face').style.display = '';
+      matchState.flipped.push(card);
+      matchState.flips += 1;
+      document.getElementById('match-flips').textContent = matchState.flips;
+      if (matchState.flipped.length === 2) {
+        matchState.locked = true;
+        const [a, b] = matchState.flipped;
+        if (a.dataset.key === b.dataset.key && a.dataset.type !== b.dataset.type) {
+          setTimeout(() => {
+            a.classList.add('matched');
+            b.classList.add('matched');
+            matchState.found += 1;
+            matchState.flipped = [];
+            matchState.locked = false;
+            document.getElementById('match-found').textContent = matchState.found;
+            if (matchState.found === MATCH_PAIRS) renderMatchEnd();
+          }, 600);
+        } else {
+          setTimeout(() => {
+            a.classList.remove('flipped');
+            b.classList.remove('flipped');
+            a.classList.add('wrong-pick');
+            b.classList.add('wrong-pick');
+            setTimeout(() => {
+              a.classList.remove('wrong-pick');
+              b.classList.remove('wrong-pick');
+              a.querySelector('.back-icon').style.display = '';
+              a.querySelector('.face').style.display = 'none';
+              b.querySelector('.back-icon').style.display = '';
+              b.querySelector('.face').style.display = 'none';
+              matchState.flipped = [];
+              matchState.locked = false;
+            }, 300);
+          }, 700);
+        }
+      }
+    }
+
+    function renderMatchEnd() {
+      const flips = matchState.flips;
+      const medal = flips <= MATCH_PAIRS * 2 ? '🏆 神记忆' : flips <= MATCH_PAIRS * 3 ? '🌟 优秀' : '👍 完成';
+      const panel = document.getElementById('game-match');
+      // 清理已有
+      const old = panel.querySelector('.celebration');
+      if (old) old.remove();
+      const div = document.createElement('div');
+      div.className = 'celebration';
+      div.id = 'match-end';
+      div.innerHTML = `<h3>${medal}</h3><p>用了 <b>${flips}</b> 次翻牌配完 <b>${MATCH_PAIRS}</b> 对。翻得越少，分数越高哦！</p><button data-action="restart-match">再来一次</button>`;
+      panel.appendChild(div);
+      div.querySelector('button').addEventListener('click', () => { div.remove(); startMatch(); });
+    }
+
+    /* ===========================================================
+       游戏 3: 连连看（民族 + 地区）
+       =========================================================== */
+    let connectState = { pairs: [], leftSel: null, rightSel: null, found: 0 };
+
+    function startConnect() {
+      const shuffled = DATA.slice();
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      const targets = shuffled.slice(0, 6);
+      connectState = {
+        pairs: targets.map(d => ({ id: d.id, name: d.name, region: (d.region || '').split(/[，。、]/)[0] })),
+        leftSel: null,
+        rightSel: null,
+        found: 0
+      };
+      renderConnect();
+    }
+
+    function renderConnect() {
+      document.getElementById('connect-score').textContent = connectState.found;
+      const { pairs } = connectState;
+      // 右边打乱
+      const rightOrder = pairs.slice();
+      for (let i = rightOrder.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [rightOrder[i], rightOrder[j]] = [rightOrder[j], rightOrder[i]];
+      }
+      const lines = pairs.map((_, i) => '<span class="connect-line">—</span>').join('');
+      const body = document.getElementById('connect-body');
+      body.innerHTML = `
+        <div class="connect-col" id="connect-left">
+          ${pairs.map(p => `<div class="connect-node" data-side="left" data-id="${p.id}">${p.name}</div>`).join('')}
+        </div>
+        <div class="connect-col" id="connect-mid">${lines}</div>
+        <div class="connect-col" id="connect-right">
+          ${rightOrder.map(p => `<div class="connect-node" data-side="right" data-id="${p.id}">${p.region}</div>`).join('')}
+        </div>
+      `;
+      body.querySelectorAll('.connect-node').forEach(n => {
+        n.addEventListener('click', () => onConnectPick(n));
+      });
+    }
+
+    function onConnectPick(node) {
+      if (node.classList.contains('matched')) return;
+      const side = node.dataset.side;
+      if (side === 'left') {
+        if (connectState.leftSel) connectState.leftSel.classList.remove('selected');
+        node.classList.add('selected');
+        connectState.leftSel = node;
+      } else {
+        if (connectState.rightSel) connectState.rightSel.classList.remove('selected');
+        node.classList.add('selected');
+        connectState.rightSel = node;
+      }
+      // 两个都选了，判定
+      if (connectState.leftSel && connectState.rightSel) {
+        const leftId = connectState.leftSel.dataset.id;
+        const rightId = connectState.rightSel.dataset.id;
+        if (leftId === rightId) {
+          connectState.leftSel.classList.add('matched');
+          connectState.rightSel.classList.add('matched');
+          connectState.found += 1;
+          document.getElementById('connect-score').textContent = connectState.found;
+          // 中间对应的那行变绿
+          const idx = connectState.pairs.findIndex(p => p.id === leftId);
+          const lineEls = document.querySelectorAll('#connect-mid .connect-line');
+          if (lineEls[idx]) lineEls[idx].classList.add('has-match');
+          connectState.leftSel = null;
+          connectState.rightSel = null;
+          if (connectState.found === connectState.pairs.length) renderConnectEnd();
+        } else {
+          // 错：取消选中
+          const l = connectState.leftSel, r = connectState.rightSel;
+          setTimeout(() => {
+            l.classList.remove('selected');
+            r.classList.remove('selected');
+          }, 350);
+          connectState.leftSel = null;
+          connectState.rightSel = null;
+        }
+      }
+    }
+
+    function renderConnectEnd() {
+      const panel = document.getElementById('game-connect');
+      const old = panel.querySelector('.celebration');
+      if (old) old.remove();
+      const div = document.createElement('div');
+      div.className = 'celebration';
+      div.id = 'connect-end';
+      div.innerHTML = `<h3>🌟 全连上了！</h3><p>你已经认识了 <b>${connectState.pairs.length}</b> 个民族的家乡。</p><button data-action="restart-connect">再来一组</button>`;
+      panel.appendChild(div);
+      div.querySelector('button').addEventListener('click', () => { div.remove(); startConnect(); });
+    }
+
+    /* ===========================================================
+       游戏 4: 记忆翻翻乐（20 张卡，10 对 民族+服饰关键词）
+       =========================================================== */
+    const MEMORY_PAIRS = 10;
+    let memoryState = { cards: [], flipped: [], timer: 0, found: 0, interval: null, locked: false };
+
+    function startMemory() {
+      if (memoryState.interval) clearInterval(memoryState.interval);
+      const shuffled = DATA.slice();
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      const targets = shuffled.slice(0, MEMORY_PAIRS);
+      const cards = [];
+      targets.forEach((d, idx) => {
+        cards.push({ key: idx, label: d.name, type: 'ethnic' });
+        // 截取服饰特征前 6 个字
+        const snippet = (d.costume || d.intro).replace(/[，。；、「」""'']/g, ' ').split(/\s+/).filter(Boolean).slice(0, 4).join(' ').slice(0, 12);
+        cards.push({ key: idx, label: snippet || d.motif, type: 'costume' });
+      });
+      // 打乱
+      for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+      }
+      memoryState = {
+        cards, flipped: [], found: 0, timer: 0, locked: false,
+        interval: setInterval(() => {
+          memoryState.timer += 1;
+          document.getElementById('memory-time').textContent = memoryState.timer;
+        }, 1000)
+      };
+      renderMemory();
+    }
+
+    function renderMemory() {
+      document.getElementById('memory-found').textContent = memoryState.found;
+      document.getElementById('memory-time').textContent = memoryState.timer;
+      const body = document.getElementById('memory-body');
+      body.innerHTML = memoryState.cards.map((c, i) => `
+        <div class="mem-card" data-i="${i}" data-key="${c.key}" data-type="${c.type}">
+          <div class="inner">
+            <div class="back">?</div>
+            <div class="face">${c.label}</div>
+          </div>
+        </div>
+      `).join('');
+      body.querySelectorAll('.mem-card').forEach(card => {
+        card.addEventListener('click', () => onMemoryFlip(card));
+      });
+    }
+
+    function onMemoryFlip(card) {
+      if (memoryState.locked) return;
+      if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+      card.classList.add('flipped');
+      memoryState.flipped.push(card);
+      if (memoryState.flipped.length === 2) {
+        memoryState.locked = true;
+        const [a, b] = memoryState.flipped;
+        if (a.dataset.key === b.dataset.key && a.dataset.type !== b.dataset.type) {
+          setTimeout(() => {
+            a.classList.add('matched');
+            b.classList.add('matched');
+            memoryState.found += 1;
+            memoryState.flipped = [];
+            memoryState.locked = false;
+            document.getElementById('memory-found').textContent = memoryState.found;
+            if (memoryState.found === MEMORY_PAIRS) renderMemoryEnd();
+          }, 500);
+        } else {
+          setTimeout(() => {
+            a.classList.remove('flipped');
+            b.classList.remove('flipped');
+            memoryState.flipped = [];
+            memoryState.locked = false;
+          }, 800);
+        }
+      }
+    }
+
+    function renderMemoryEnd() {
+      clearInterval(memoryState.interval);
+      const t = memoryState.timer;
+      const medal = t < 30 ? '🏆 神速' : t < 60 ? '🌟 优秀' : '👍 完成';
+      const panel = document.getElementById('game-memory');
+      const old = panel.querySelector('.celebration');
+      if (old) old.remove();
+      const div = document.createElement('div');
+      div.className = 'celebration';
+      div.id = 'memory-end';
+      div.innerHTML = `<h3>${medal}</h3><p>用 <b>${t}</b> 秒记完所有 <b>${MEMORY_PAIRS}</b> 对民族与服饰。</p><button data-action="restart-memory">再来一局</button>`;
+      panel.appendChild(div);
+      div.querySelector('button').addEventListener('click', () => { div.remove(); startMemory(); });
+    }
+
+    /* ===========================================================
+       游戏菜单 → 进入/退出
+       =========================================================== */
+    document.querySelectorAll('.game-card[data-game]').forEach(card => {
+      card.addEventListener('click', () => {
+        const g = card.dataset.game;
+        ['game-menu','game-quiz','game-match','game-connect','game-memory'].forEach(id => {
+          document.getElementById(id).classList.remove('active');
+        });
+        if (g === 'quiz') {
+          document.getElementById('game-quiz').classList.add('active');
+          startQuiz();
+        } else if (g === 'match') {
+          document.getElementById('game-match').classList.add('active');
+          startMatch();
+        } else if (g === 'connect') {
+          document.getElementById('game-connect').classList.add('active');
+          startConnect();
+        } else if (g === 'memory') {
+          document.getElementById('game-memory').classList.add('active');
+          startMemory();
+        }
+      });
+    });
+
+    document.querySelectorAll('.game-back').forEach(b => {
+      b.addEventListener('click', () => {
+        if (memoryState.interval) {
+          clearInterval(memoryState.interval);
+          memoryState.interval = null;
+        }
+        // 清理 end 面板
+        ['match-end','connect-end','memory-end'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.remove();
+        });
+        showGameMenu();
+      });
+    });
+  </script>
+</body>
+</html>
