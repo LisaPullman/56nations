@@ -1376,6 +1376,19 @@
   }
   .kidfact-speak:hover { color: var(--brand); }
 
+  /* 朗读中：轻微脉动反馈 */
+  .ma-btn.speak.playing {
+    border-color: var(--brand);
+    color: var(--brand);
+    background: var(--brand-muted);
+    animation: speak-pulse 0.9s ease-in-out infinite;
+  }
+  .kidfact-speak.playing { color: var(--brand); animation: speak-pulse 0.9s ease-in-out infinite; }
+  @keyframes speak-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+
   /* 提示 toast */
   .toast {
     position: fixed;
@@ -2084,7 +2097,9 @@
       knowBtn.textContent = known ? '已认识 ✓（点一下取消）' : '我认识它啦！';
     }
 
-    /* ---------- 语音朗读（Web Speech API，儿童慢速） ---------- */
+    /* ---------- 语音朗读（预生成 Edge TTS 音频，Web Speech 兜底） ---------- */
+    // 主路径：播放 audio/ 目录下预合成的 MP3（晓伊 · 活泼音色，温暖自然）
+    // 兜底：MP3 加载失败（离线/缺文件）时回退浏览器 speechSynthesis
     const TTS_OK = 'speechSynthesis' in window && typeof SpeechSynthesisUtterance !== 'undefined';
     let zhVoice = null;
     function pickZhVoice() {
@@ -2095,8 +2110,8 @@
       } catch (e) {}
       return zhVoice;
     }
-    function speak(text) {
-      if (!TTS_OK || !text) return;
+    function speakFallback(text, btn) {
+      if (!TTS_OK || !text) return false;
       try {
         speechSynthesis.cancel();
         const u = new SpeechSynthesisUtterance(text);
@@ -2105,13 +2120,62 @@
         u.pitch = 1.05;
         const v = zhVoice || pickZhVoice();
         if (v) u.voice = v;
+        if (btn) {
+          clearPlayingState();
+          playingBtn = btn;
+          fallbackActive = true;
+          btn.classList.add('playing');
+          const fin = () => { if (playingBtn === btn) { clearPlayingState(); fallbackActive = false; } };
+          u.onend = fin;
+          u.onerror = fin;
+        }
         speechSynthesis.speak(u);
-      } catch (e) {}
+        return true;
+      } catch (e) { return false; }
+    }
+    const AUDIO_BASE = 'audio/';
+    const audioPlayer = new Audio();
+    audioPlayer.preload = 'none';
+    let playingBtn = null;
+    let fallbackActive = false;   // 当前是否处于 Web Speech 兜底朗读
+    function clearPlayingState() {
+      if (playingBtn) { playingBtn.classList.remove('playing'); playingBtn = null; }
+    }
+    audioPlayer.addEventListener('ended', clearPlayingState);
+    audioPlayer.addEventListener('error', clearPlayingState);
+    function stopSpeak() {
+      try { speechSynthesis.cancel(); } catch (e) {}
+      fallbackActive = false;
+      if (audioPlayer.src) {
+        try { audioPlayer.pause(); } catch (e) {}
+        audioPlayer.removeAttribute('src');
+        try { audioPlayer.load(); } catch (e) {}   // 释放已缓冲的音频
+      }
+      clearPlayingState();
+    }
+    function speak(text, audioName, btn) {
+      // 再次点击同一按钮 = 停止朗读
+      if (btn && btn === playingBtn && ((audioPlayer.src && !audioPlayer.paused) || fallbackActive)) {
+        stopSpeak();
+        return;
+      }
+      stopSpeak();   // 停掉上一段
+      if (audioName) {
+        playingBtn = btn || null;
+        if (btn) btn.classList.add('playing');
+        audioPlayer.src = AUDIO_BASE + audioName + '.mp3';
+        const p = audioPlayer.play();
+        if (p && p.catch) p.catch(() => {
+          // MP3 不可用 → 回退 Web Speech；再不行给个提示
+          clearPlayingState();
+          if (!speakFallback(text, btn)) showToast('😢 当前无法播放语音');
+        });
+        return;
+      }
+      if (!speakFallback(text, btn)) showToast('😢 当前浏览器不支持语音播放');
     }
     if (TTS_OK) {
       try { speechSynthesis.onvoiceschanged = () => { zhVoice = null; }; } catch (e) {}
-    } else {
-      document.querySelectorAll('.ma-btn.speak, .kidfact-speak').forEach(b => { b.style.display = 'none'; });
     }
 
     /* ---------- 卡片渲染 ---------- */
@@ -2259,6 +2323,7 @@
       modalCloseBtn.focus();
     }
     function closeModal() {
+      stopSpeak();   // 关闭弹窗时停止朗读
       modalEl.classList.remove('open');
       document.body.classList.remove('modal-open');
       if (lastFocus && lastFocus.focus) lastFocus.focus();
@@ -2270,6 +2335,7 @@
       fillModal(DATA[currentIdx], currentIdx);
     }
     function fillModal(d, idx) {
+      stopSpeak();   // 切换民族时停止上一段的朗读
       const pattern = makePatternSVG(d.color, 1000 + idx);
       modalPattern.style.backgroundImage = `url('${pattern}')`;
       // 先按民族名取图；同一张图已缓存时直接显示，否则等待 load/error
@@ -2320,16 +2386,17 @@
       if (e.target === modalEl) closeModal();
       // 朗读按钮：读名字 / 读全部（小知识+服饰+文化概览）/ 读趣味知识
       // 「读全部」与弹窗展示的内容一一对应：名字、小知识、典型服饰、文化概览
+      // 兜底文本与预生成 MP3 的合成文本保持一致
       const sp = e.target.closest('[data-speak]');
       if (sp && currentIdx >= 0) {
         const d = DATA[currentIdx];
         const kind = sp.dataset.speak;
-        if (kind === 'name') speak(d.name);
-        else if (kind === 'kid') speak(d.kidFact);
+        if (kind === 'name') speak(d.name, d.id + '_name', sp);
+        else if (kind === 'kid') speak(d.kidFact, d.id + '_kid', sp);
         else speak([d.name, d.kidFact, `他们的传统服饰：${d.costume}`, d.intro]
           .filter(Boolean)
           .map(s => s.trim().replace(/[。！!？?，,]+$/, ''))
-          .join('。') + '。');
+          .join('。') + '。', d.id + '_all', sp);
       }
     });
 

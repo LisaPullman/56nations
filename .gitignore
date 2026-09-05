@@ -20,5 +20,12 @@ yarn-error.log*
 # Local server
 *.log
 
+# Python
+__pycache__/
+*.pyc
+
+# TTS 本地测试产物
+TTS skill/test/
+
 # 源文件(项目外)
 LOGO_*
